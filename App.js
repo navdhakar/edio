@@ -19,11 +19,13 @@ import {
 } from 'react-native';
 
 import Authentication from './components/Authentication/Authentication';
+import Navigation from './navigation/index';
 
 const App = () => {
   return (
-    <SafeAreaView style={{width: '100%', height: '100%'}}>
-      <Authentication />
+    <SafeAreaView
+      style={{width: '100%', height: '100%', backgroundColor: '#28B9D7'}}>
+      <Navigation />
     </SafeAreaView>
   );
 };

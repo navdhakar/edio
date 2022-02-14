@@ -14,54 +14,57 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
+import {Formik} from 'formik';
 import {useTheme} from 'react-native-paper';
-
-const SignInScreen = () => {
+import * as Yup from 'yup';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/stack';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+const signinvalidationSchema = Yup.object().shape({
+  email: Yup.string().required().email('please enter valid email'),
+  password: Yup.string().required().min(2, 'not strong password'),
+});
+const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
     username: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
   });
 
   const {colors} = useTheme();
 
-  const textInputChange = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
-    }
-  };
+  // const textInputChange = val => {
+  //   if (val.trim().length >= 4) {
+  //     setData({
+  //       ...data,
+  //       username: val,
+  //       check_textInputChange: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       username: val,
+  //       check_textInputChange: false,
+  //     });
+  //   }
+  // };
 
-  const handlePasswordChange = val => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
-    }
-  };
+  // const handlePasswordChange = val => {
+  //   if (val.trim().length >= 8) {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: false,
+  //     });
+  //   }
+  // };
 
   const updateSecureTextEntry = () => {
     setData({
@@ -70,25 +73,28 @@ const SignInScreen = () => {
     });
   };
 
-  const handleValidUser = val => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidUser: false,
-      });
-    }
-  };
+  // const handleValidUser = val => {
+  //   if (val.trim().length >= 4) {
+  //     setData({
+  //       ...data,
+  //       isValidUser: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       isValidUser: false,
+  //     });
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Log In</Text>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Select')}>
+          <Text style={styles.signin}>Sign In</Text>
+        </TouchableWithoutFeedback>
       </View>
       <Animatable.View
         animation="fadeInUpBig"
@@ -98,77 +104,84 @@ const SignInScreen = () => {
             backgroundColor: colors.background,
           },
         ]}>
-        <Text style={[styles.text_footer]}>Username</Text>
-        <View style={styles.action}>
-          <FontAwesome name="user-o" color={colors.text} size={20} />
-          <TextInput
-            placeholder="Your Username"
-            placeholderTextColor="#666666"
-            style={[
-              styles.textInput,
-              {
-                color: colors.text,
-              },
-            ]}
-            autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
-            onEndEditing={e => handleValidUser(e.nativeEvent.text)}
-          />
-          {data.check_textInputChange ? (
-            <Animatable.View animation="bounceIn">
-              <Feather name="check-circle" color="green" size={20} />
-            </Animatable.View>
-          ) : null}
-        </View>
-        {data.isValidUser ? null : (
-          <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>
-              Username must be 4 characters long.
-            </Text>
-          </Animatable.View>
-        )}
+        <Formik
+          initialValues={{email: '', password: ''}}
+          validationSchema={signinvalidationSchema}
+          onSubmit={(values, actions) => {
+            console.log(values);
+          }}>
+          {props => (
+            <View>
+              <Text style={[styles.text_footer]}>Email</Text>
 
-        <Text
-          style={[
-            styles.text_footer,
-            {
-              color: colors.text,
-              marginTop: 35,
-            },
-          ]}>
-          Password
-        </Text>
-        <View style={styles.action}>
-          <Feather name="lock" color={colors.text} size={20} />
-          <TextInput
-            placeholder="Your Password"
-            placeholderTextColor="#666666"
-            secureTextEntry={data.secureTextEntry ? true : false}
-            style={[
-              styles.textInput,
-              {
-                color: colors.text,
-              },
-            ]}
-            autoCapitalize="none"
-            onChangeText={val => handlePasswordChange(val)}
-          />
-          <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? (
-              <Feather name="eye-off" color="grey" size={20} />
-            ) : (
-              <Feather name="eye" color="grey" size={20} />
-            )}
-          </TouchableOpacity>
-        </View>
-        {data.isValidPassword ? null : (
-          <Animatable.View animation="fadeInLeft" duration={500}>
-            <Text style={styles.errorMsg}>
-              Password must be 8 characters long.
-            </Text>
-          </Animatable.View>
-        )}
-
+              <View style={styles.action}>
+                <FontAwesome name="user-o" color={colors.text} size={20} />
+                <TextInput
+                  placeholder="Your Email"
+                  placeholderTextColor="#666666"
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('email')}
+                  value={props.values.email}
+                />
+                {data.check_textInputChange ? (
+                  <Animatable.View animation="bounceIn">
+                    <Feather name="check-circle" color="green" size={20} />
+                  </Animatable.View>
+                ) : null}
+              </View>
+              {props.errors.email ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <Text style={styles.errorMsg}>{props.errors.email}</Text>
+                </Animatable.View>
+              ) : null}
+              <Text
+                style={[
+                  styles.text_footer,
+                  {
+                    color: colors.text,
+                    marginTop: 35,
+                  },
+                ]}>
+                Password
+              </Text>
+              <View style={styles.action}>
+                <Feather name="lock" color={colors.text} size={20} />
+                <TextInput
+                  placeholder="Your Password"
+                  placeholderTextColor="#666666"
+                  // secureTextEntry={data.secureTextEntry ? true : false}
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('password')}
+                  value={props.values.password}
+                />
+                <TouchableOpacity onPress={updateSecureTextEntry}>
+                  {data.secureTextEntry ? (
+                    <Feather name="eye-off" color="grey" size={20} />
+                  ) : (
+                    <Feather name="eye" color="grey" size={20} />
+                  )}
+                </TouchableOpacity>
+              </View>
+              {props.errors.password ? (
+                <Animatable.View animation="fadeInLeft" duration={500}>
+                  <Text style={styles.errorMsg}>{props.errors.password}</Text>
+                </Animatable.View>
+              ) : null}
+            </View>
+          )}
+        </Formik>
         <TouchableOpacity>
           <Text style={{color: '#009387', marginTop: 15}}>
             Forgot password?
@@ -270,9 +283,16 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 0.2,
-    justifyContent: 'flex-end',
+
     paddingHorizontal: 20,
     paddingBottom: 20,
+    flexDirection: 'row',
+  },
+  signin: {
+    alignContent: 'flex-end',
+    color: '#3A5898',
+    fontWeight: 'bold',
+    fontSize: 30,
   },
   footer: {
     flex: 3,
@@ -283,6 +303,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   text_header: {
+    flex: 1,
     color: '#000',
     fontWeight: 'bold',
     fontSize: 30,
