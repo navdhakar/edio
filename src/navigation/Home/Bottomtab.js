@@ -4,10 +4,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../../screens/Home/Home';
 // import Camera from '../screens/Camera';
 import Reportboard from '../../screens/Home/Reportboard';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 // import plusIcon from '../assets/images/plus-icon.png';
 
@@ -18,41 +18,42 @@ const Bottomtabnav = () => {
     <Tab.Navigator
       tabBarOptions={{
         tabStyle: {
-          backgroundColor: '#000',
+          backgroundColor: '#C4C4C4',
+		 
         },
-        activeTintColor: '#fff',
+        activeTintColor: '#000',
       }}>
       <Tab.Screen
-        name={'Test Series'}
+        name={'Home'}
         component={Home}
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => (
-            <SimpleLineIcons name={'notebook'} size={25} color={color} />
+            <Entypo name={'home'} size={25}  />
           ),
         }}
       />
       <Tab.Screen
-        name={'Report Board'}
+        name={'Summary'}
         component={Reportboard}
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => (
-            <Ionicons
-              name={'document-attach-outline'}
+            <AntDesign
+              name={'piechart'}
               size={25}
-              color={color}
+             
             />
           ),
         }}
       />
       <Tab.Screen
-        name={'Offer Letter'}
+        name={'More'}
         component={() => <Text>Offer Letter</Text>}
         options={{
           headerShown: false,
           tabBarIcon: ({color}) => (
-            <Feather name={'clipboard'} size={25} color={color} />
+            <Feather name={'menu'} size={25} />
           ),
         }}
       />
