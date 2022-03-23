@@ -20,9 +20,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const signinvalidationSchema = Yup.object().shape({
   PhoneNumber: Yup.string().required().min(10, 'not strong password'),
 });
-export default function Mobile({navigation}) {
+export default function Mobile() {
   const {colors} = useTheme();
-  const [placeholder_value, setplaceholder] = useState('Phone Number');
+  const [placeholder_value, setplaceholder] = useState('');
 
   return (
     <View style={styles.container}>
@@ -30,8 +30,7 @@ export default function Mobile({navigation}) {
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
       <View>
-        <Text style={[styles.text_footer]}>Sign up/Log in</Text>
-        <Text style={{color: '#660066', marginLeft: 15}}>Phone Number</Text>
+        <Text style={[styles.text_footer]}>Verify phone number</Text>
       </View>
       <Formik
         initialValues={{PhoneNumber: ''}}
@@ -40,19 +39,91 @@ export default function Mobile({navigation}) {
           console.log(values);
         }}>
         {props => (
-          <View>
+          <View style={{flexDirection: 'row', width: '80%'}}>
             <View style={styles.action}>
               <TouchableOpacity
                 style={styles.mobilenoani}
                 onPress={() => {
-                  setplaceholder('9887224732');
                   console.log(placeholder_value);
                 }}
                 onFocus={() => {
-                  setplaceholder('9887224733');
                   console.log(placeholder_value);
                 }}>
-                <Text style={styles.code}>+91</Text>
+                <TextInput
+                  placeholder={placeholder_value}
+                  placeholderTextColor="#666666"
+                  keyboardType="numeric"
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('PhoneNumber')}
+                  value={props.values.PhoneNumber}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.action}>
+              <TouchableOpacity
+                style={styles.mobilenoani}
+                onPress={() => {
+                  console.log(placeholder_value);
+                }}
+                onFocus={() => {
+                  console.log(placeholder_value);
+                }}>
+                <TextInput
+                  placeholder={placeholder_value}
+                  placeholderTextColor="#666666"
+                  keyboardType="numeric"
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('PhoneNumber')}
+                  value={props.values.PhoneNumber}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.action}>
+              <TouchableOpacity
+                style={styles.mobilenoani}
+                onPress={() => {
+                  console.log(placeholder_value);
+                }}
+                onFocus={() => {
+                  console.log(placeholder_value);
+                }}>
+                <TextInput
+                  placeholder={placeholder_value}
+                  placeholderTextColor="#666666"
+                  keyboardType="numeric"
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('PhoneNumber')}
+                  value={props.values.PhoneNumber}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.action}>
+              <TouchableOpacity
+                style={styles.mobilenoani}
+                onPress={() => {
+                  console.log(placeholder_value);
+                }}
+                onFocus={() => {
+                  console.log(placeholder_value);
+                }}>
                 <TextInput
                   placeholder={placeholder_value}
                   placeholderTextColor="#666666"
@@ -72,11 +143,23 @@ export default function Mobile({navigation}) {
           </View>
         )}
       </Formik>
-      <Text>Enter your 10 digit phone number</Text>
+      <Text style={{paddingLeft: 10}}>
+        Enter the 4 digit OTP send to +91 9075839282
+      </Text>
+      <Text
+        style={{
+          paddingLeft: 10,
+          fontSize: 16,
+          fontWeight: '600',
+          paddingTop: 20,
+        }}>
+        Resend OTP in{' '}
+        <Text style={{fontWeight: '600', color: 'black'}}>00:30</Text>
+      </Text>
       <View style={styles.button}>
         <TouchableOpacity
           style={[styles.signIn, {justifyContent: 'center'}]}
-          onPress={() => navigation.navigate('Otp')}>
+          onPress={() => navigation.navigate('MobileNo')}>
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
             style={[styles.signIN, {justifyContent: 'center'}]}>
@@ -87,7 +170,7 @@ export default function Mobile({navigation}) {
                   color: '#fff',
                 },
               ]}>
-              SEND OTP
+              VERIFY
             </Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -135,6 +218,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   action: {
+    flex: 1,
     marginLeft: 7,
     marginRight: 7,
     marginTop: 10,
