@@ -18,8 +18,8 @@ import {
   View,
 } from 'react-native';
 
-import Authentication from './components/Authentication/Authentication';
-import Navigation from './navigation/index';
+import Authentication from './src/components/Authentication/Authentication';
+import Navigation from './src/navigation/index';
 
 const App = () => {
   return (
