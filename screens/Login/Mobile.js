@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -16,11 +16,13 @@ import * as Yup from 'yup';
 import {useTheme} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 const signinvalidationSchema = Yup.object().shape({
-  PhoneNumber: Yup.string().required().min(2, 'not strong password'),
+  PhoneNumber: Yup.string().required().min(10, 'not strong password'),
 });
 export default function Mobile() {
   const {colors} = useTheme();
+  const [placeholder_value, setplaceholder] = useState('Phone Number');
 
   return (
     <View style={styles.container}>
@@ -40,25 +42,32 @@ export default function Mobile() {
         {props => (
           <View>
             <View style={styles.action}>
-              <TextInput
-                placeholder="Phone Number"
-                placeholderTextColor="#666666"
-                keyboardType="numeric"
-                style={[
-                  styles.textInput,
-                  {
-                    color: colors.text,
-                  },
-                ]}
-                autoCapitalize="none"
-                onChangeText={props.handleChange('PhoneNumber')}
-                value={props.values.PhoneNumber}
-              />
-              {/* {data.check_textInputChange ? (
-                <Animatable.View animation="bounceIn">
-                  <Feather name="check-circle" color="green" size={20} />
-                </Animatable.View>
-              ) : null} */}
+              <TouchableOpacity
+                style={styles.mobilenoani}
+                onPress={() => {
+                  setplaceholder('9887224732');
+                  console.log(placeholder_value);
+                }}
+                onFocus={() => {
+                  setplaceholder('9887224733');
+                  console.log(placeholder_value);
+                }}>
+                <Text style={styles.code}>+91</Text>
+                <TextInput
+                  placeholder={placeholder_value}
+                  placeholderTextColor="#666666"
+                  keyboardType="numeric"
+                  style={[
+                    styles.textInput,
+                    {
+                      color: colors.text,
+                    },
+                  ]}
+                  autoCapitalize="none"
+                  onChangeText={props.handleChange('PhoneNumber')}
+                  value={props.values.PhoneNumber}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         )}
@@ -70,7 +79,7 @@ export default function Mobile() {
           onPress={() => navigation.navigate('MobileNo')}>
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
-            style={[styles.signIn, {justifyContent: 'center'}]}>
+            style={[styles.signIN, {justifyContent: 'center'}]}>
             <Text
               style={[
                 styles.textSign,
@@ -128,14 +137,11 @@ const styles = StyleSheet.create({
   action: {
     marginLeft: 7,
     marginRight: 7,
-    flexDirection: 'row',
     marginTop: 10,
     borderWidth: 1,
     borderColor: '#660066',
-    paddingBottom: 5,
     borderRadius: 10,
     height: 60,
-    justifyContent: 'center',
   },
   actionError: {
     flexDirection: 'row',
@@ -144,13 +150,21 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FF0000',
     paddingBottom: 5,
   },
-  textInput: {
+  mobilenoani: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  code: {
+    flex: 1,
+    fontSize: 24,
+    color: 'black',
     paddingLeft: 10,
+  },
+  textInput: {
+    flex: 6,
     color: '#660066',
     fontSize: 24,
-    justifyContent: 'center',
   },
   errorMsg: {
     color: '#FF0000',
@@ -162,6 +176,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   signIn: {
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    paddingRight: 20,
+  },
+  signIN: {
     width: 150,
     height: 50,
     justifyContent: 'center',
