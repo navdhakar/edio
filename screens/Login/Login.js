@@ -9,7 +9,10 @@ import {
   StatusBar,
   Image,
   Alert,
+  Button,
+  Dimensions,
 } from 'react-native';
+import {SliderBox} from 'react-native-image-slider-box';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -31,7 +34,11 @@ const SignInScreen = ({navigation}) => {
     check_textInputChange: false,
     secureTextEntry: true,
   });
-
+  const illustration = [
+    require('../../assets/icons/slide1.png'),
+    require('../../assets/icons/slide2.png'),
+    require('../../assets/icons/slide3.png'),
+  ];
   const {colors} = useTheme();
 
   // const textInputChange = val => {
@@ -89,22 +96,21 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <StatusBar backgroundColor="#white" barStyle="light-content" />
       <View style={styles.header}>
-        <Text style={styles.text_header}>Log In</Text>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Select')}>
-          <Text style={styles.signin}>Sign In</Text>
-        </TouchableWithoutFeedback>
+        <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
-      <Animatable.View
-        animation="fadeInUpBig"
-        style={[
-          styles.footer,
-          {
-            backgroundColor: colors.background,
-          },
-        ]}>
-        <Formik
+      <View style={styles.show_text}>
+        <SliderBox
+          images={illustration}
+          sliderBoxHeight={475}
+          dotColor="#660066"
+          inactiveDotColor="#D1D5DB"
+          autoplay={true}
+        />
+      </View>
+      <Animatable.View animation="fadeInUpBig" style={[styles.footer]}>
+        {/* <Formik
           initialValues={{email: '', password: ''}}
           validationSchema={signinvalidationSchema}
           onSubmit={(values, actions) => {
@@ -181,21 +187,19 @@ const SignInScreen = ({navigation}) => {
               ) : null}
             </View>
           )}
-        </Formik>
-        <TouchableOpacity>
+        </Formik> */}
+        {/* <TouchableOpacity>
           <Text style={{color: '#009387', marginTop: 15}}>
             Forgot password?
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={styles.button}>
           <TouchableOpacity
-            style={styles.signIn}
-            onPress={() => {
-              loginHandle(data.username, data.password);
-            }}>
+            style={[styles.signIn, {justifyContent: 'center'}]}
+            onPress={() => navigation.navigate('MobileNo')}>
             <LinearGradient
-              colors={['#28B9D7', '#28B9D7']}
-              style={styles.signIn}>
+              colors={['#660066CC', '#660066CC']}
+              style={[styles.signIn, {justifyContent: 'center'}]}>
               <Text
                 style={[
                   styles.textSign,
@@ -203,11 +207,11 @@ const SignInScreen = ({navigation}) => {
                     color: '#fff',
                   },
                 ]}>
-                Log In
+                GET STARTED
               </Text>
             </LinearGradient>
           </TouchableOpacity>
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -245,14 +249,14 @@ const SignInScreen = ({navigation}) => {
             }}>
             <LinearGradient
               colors={['#fff', '#fff']}
-              style={[styles.signIn, {flexDirection: 'row'}]}>
-              {/* <FontAwesome
+              style={[styles.signIn, {flexDirection: 'row'}]}> */}
+          {/* <FontAwesome
                 name="google"
                 color={colors.text}
                 size={20}
                 style={{paddingRight: 5}}
               /> */}
-              <Image
+          {/* <Image
                 source={require('../../assets/icons/icon_google.svg')}
                 style={[styles.ImageIconStyle, {paddingRight: 20}]}
               />
@@ -267,7 +271,7 @@ const SignInScreen = ({navigation}) => {
                 Continue with Google
               </Text>
             </LinearGradient>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </Animatable.View>
     </View>
@@ -278,15 +282,24 @@ export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 8,
     backgroundColor: '#fff',
   },
+  show_text: {
+    flex: 6,
+    alignItems: 'center',
+    fontWeight: 600,
+    fontSize: 24,
+    height: '50%',
+    justifyContent: 'flex-end',
+  },
   header: {
-    flex: 0.2,
-
+    flex: 0.6,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 20,
-    flexDirection: 'row',
+    paddingTop: 20,
   },
   signin: {
     alignContent: 'flex-end',
@@ -295,7 +308,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   footer: {
-    flex: 3,
+    flex: 1,
     backgroundColor: '#fff',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
@@ -339,6 +352,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     marginTop: 50,
+    borderRadius: 50,
   },
   signIn: {
     width: '100%',
@@ -346,7 +360,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    paddingBottom: 10,
+
+    borderRadius: 25,
   },
   textSign: {
     fontSize: 18,
