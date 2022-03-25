@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -18,11 +18,21 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const signinvalidationSchema = Yup.object().shape({
-  PhoneNumber: Yup.string().required().min(10, 'not strong password'),
+  code1: Yup.string().required().min(1, 'not strong password'),
+  code2: Yup.string().required().min(1, 'not strong password'),
+  code3: Yup.string().required().min(1, 'not strong password'),
+  code4: Yup.string().required().min(1, 'not strong password'),
 });
-export default function Mobile() {
+export default function Otp({navigation}) {
   const {colors} = useTheme();
-  const [placeholder_value, setplaceholder] = useState('');
+  const [focus, setfocus] = useState(false);
+  const [verify, setverify] = useState(false);
+  const customVerify = verify ? styles.validverifystyle : styles.verifystyle;
+  const customStyle = focus ? styles.actionfocus : styles.action;
+  const code1 = useRef();
+  const code2 = useRef();
+  const code3 = useRef();
+  const code4 = useRef();
 
   return (
     <View style={styles.container}>
@@ -33,89 +43,83 @@ export default function Mobile() {
         <Text style={[styles.text_footer]}>Verify phone number</Text>
       </View>
       <Formik
-        initialValues={{PhoneNumber: ''}}
+        initialValues={{code1: '', code2: '', code3: '', code4: ''}}
         validationSchema={signinvalidationSchema}
         onSubmit={(values, actions) => {
           console.log(values);
         }}>
         {props => (
           <View style={{flexDirection: 'row', width: '80%'}}>
-            <View style={styles.action}>
-              <TouchableOpacity
-                style={styles.mobilenoani}
-                onPress={() => {
-                  console.log(placeholder_value);
-                }}
-                onFocus={() => {
-                  console.log(placeholder_value);
-                }}>
+            <View style={customStyle} onFocus={() => setfocus(true)}>
+              <TouchableOpacity style={styles.mobilenoani}>
                 <TextInput
-                  placeholder={placeholder_value}
                   placeholderTextColor="#666666"
                   keyboardType="numeric"
                   style={[
-                    styles.textInput,
+                    styles.textInput1,
                     {
                       color: colors.text,
                     },
                   ]}
                   autoCapitalize="none"
-                  onChangeText={props.handleChange('PhoneNumber')}
-                  value={props.values.PhoneNumber}
+                  onChangeText={props.handleChange('code1')}
+                  value={props.values.code1}
+                  maxLength={1}
+                  ref={code1}
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    code2.current.focus();
+                  }}
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.action}>
-              <TouchableOpacity
-                style={styles.mobilenoani}
-                onPress={() => {
-                  console.log(placeholder_value);
-                }}
-                onFocus={() => {
-                  console.log(placeholder_value);
-                }}>
+            <View style={customStyle} onFocus={() => setfocus(true)}>
+              <TouchableOpacity style={styles.mobilenoani}>
                 <TextInput
-                  placeholder={placeholder_value}
                   placeholderTextColor="#666666"
                   keyboardType="numeric"
                   style={[
-                    styles.textInput,
+                    styles.textInput2,
                     {
                       color: colors.text,
                     },
                   ]}
                   autoCapitalize="none"
-                  onChangeText={props.handleChange('PhoneNumber')}
-                  value={props.values.PhoneNumber}
+                  onChangeText={props.handleChange('code2')}
+                  value={props.values.code2}
+                  maxLength={1}
+                  ref={code2}
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    code3.current.focus();
+                  }}
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.action}>
-              <TouchableOpacity
-                style={styles.mobilenoani}
-                onPress={() => {
-                  console.log(placeholder_value);
-                }}
-                onFocus={() => {
-                  console.log(placeholder_value);
-                }}>
+            <View style={customStyle} onFocus={() => setfocus(true)}>
+              <TouchableOpacity style={styles.mobilenoani}>
                 <TextInput
-                  placeholder={placeholder_value}
                   placeholderTextColor="#666666"
                   keyboardType="numeric"
                   style={[
-                    styles.textInput,
+                    styles.textInput3,
                     {
                       color: colors.text,
                     },
                   ]}
                   autoCapitalize="none"
-                  onChangeText={props.handleChange('PhoneNumber')}
-                  value={props.values.PhoneNumber}
+                  onChangeText={props.handleChange('code3')}
+                  value={props.values.code3}
+                  maxLength={1}
+                  ref={code3}
+                  returnKeyType="next"
+                  onSubmitEditing={() => {
+                    code4.current.focus();
+                  }}
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.action}>
+            <View style={customStyle} onFocus={() => setfocus(true)}>
               <TouchableOpacity
                 style={styles.mobilenoani}
                 onPress={() => {
@@ -125,18 +129,19 @@ export default function Mobile() {
                   console.log(placeholder_value);
                 }}>
                 <TextInput
-                  placeholder={placeholder_value}
                   placeholderTextColor="#666666"
                   keyboardType="numeric"
                   style={[
-                    styles.textInput,
+                    styles.textInput4,
                     {
                       color: colors.text,
                     },
                   ]}
                   autoCapitalize="none"
-                  onChangeText={props.handleChange('PhoneNumber')}
-                  value={props.values.PhoneNumber}
+                  onChangeText={props.handleChange('code4')}
+                  value={props.values.code4}
+                  maxLength={1}
+                  ref={code4}
                 />
               </TouchableOpacity>
             </View>
@@ -159,10 +164,10 @@ export default function Mobile() {
       <View style={styles.button}>
         <TouchableOpacity
           style={[styles.signIn, {justifyContent: 'center'}]}
-          onPress={() => navigation.navigate('MobileNo')}>
+          onPress={() => navigation.navigate('StudentInfo')}>
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
-            style={[styles.signIN, {justifyContent: 'center'}]}>
+            style={[customVerify, {justifyContent: 'center'}]}>
             <Text
               style={[
                 styles.textSign,
@@ -227,6 +232,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 60,
   },
+  actionfocus: {
+    flex: 1,
+    marginLeft: 7,
+    marginRight: 7,
+    marginTop: 10,
+    borderWidth: 1,
+    borderLeftWidth: 3,
+    borderColor: '#660066',
+    borderRadius: 10,
+    height: 60,
+  },
   actionError: {
     flexDirection: 'row',
     marginTop: 10,
@@ -245,7 +261,26 @@ const styles = StyleSheet.create({
     color: 'black',
     paddingLeft: 10,
   },
-  textInput: {
+  textInput1: {
+    flex: 6,
+    color: '#660066',
+    fontSize: 24,
+  },
+  textInput1focus: {
+    backgroundColor: 'green',
+    borderColor: 'red',
+  },
+  textInput2: {
+    flex: 6,
+    color: '#660066',
+    fontSize: 24,
+  },
+  textInput3: {
+    flex: 6,
+    color: '#660066',
+    fontSize: 24,
+  },
+  textInput4: {
     flex: 6,
     color: '#660066',
     fontSize: 24,
@@ -268,6 +303,21 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   signIN: {
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+  },
+  validverifystyle: {
+    width: 150,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    color: 'grey',
+  },
+  verifystyle: {
     width: 150,
     height: 50,
     justifyContent: 'center',

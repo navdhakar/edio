@@ -30,8 +30,17 @@ export default function Mobile({navigation}) {
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
       <View>
-        <Text style={[styles.text_footer]}>Sign up/Log in</Text>
-        <Text style={{color: '#660066', marginLeft: 15}}>Phone Number</Text>
+        <View style={{marginBottom: 20}}>
+          <Text style={[styles.text_footer]}>Sign up/Log in</Text>
+        </View>
+        <View style={styles.labelContainer}>
+          <Text
+            style={{
+              color: '#660066',
+            }}>
+            Phone Number
+          </Text>
+        </View>
       </View>
       <Formik
         initialValues={{PhoneNumber: ''}}
@@ -41,38 +50,36 @@ export default function Mobile({navigation}) {
         }}>
         {props => (
           <View>
-            <View style={styles.action}>
-              <TouchableOpacity
-                style={styles.mobilenoani}
-                onPress={() => {
-                  setplaceholder('9887224732');
-                  console.log(placeholder_value);
-                }}
-                onFocus={() => {
-                  setplaceholder('9887224733');
-                  console.log(placeholder_value);
-                }}>
+            <View
+              style={styles.action}
+              onFocus={() => {
+                setplaceholder('9887224733');
+                console.log(placeholder_value);
+              }}>
+              <TouchableOpacity style={styles.mobilenoani}>
                 <Text style={styles.code}>+91</Text>
-                <TextInput
-                  placeholder={placeholder_value}
-                  placeholderTextColor="#666666"
-                  keyboardType="numeric"
-                  style={[
-                    styles.textInput,
-                    {
-                      color: colors.text,
-                    },
-                  ]}
-                  autoCapitalize="none"
-                  onChangeText={props.handleChange('PhoneNumber')}
-                  value={props.values.PhoneNumber}
-                />
+                <View style={{flex: 6}}>
+                  <TextInput
+                    placeholder={placeholder_value}
+                    placeholderTextColor="#666666"
+                    keyboardType="numeric"
+                    style={[
+                      styles.textInput,
+                      {
+                        color: colors.text,
+                      },
+                    ]}
+                    autoCapitalize="none"
+                    onChangeText={props.handleChange('PhoneNumber')}
+                    value={props.values.PhoneNumber}
+                  />
+                </View>
               </TouchableOpacity>
             </View>
           </View>
         )}
       </Formik>
-      <Text>Enter your 10 digit phone number</Text>
+      <Text style={{marginLeft: 10}}>Enter your 10 digit phone number</Text>
       <View style={styles.button}>
         <TouchableOpacity
           style={[styles.signIn, {justifyContent: 'center'}]}
@@ -99,6 +106,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  labelContainer: {
+    backgroundColor: 'white', // Same color as background
+    alignSelf: 'flex-start', // Have View be same width as Text inside
+    // Amount of spacing between border and first/last letter
+    // How far right do you want the label to start
+    zIndex: 1, // Label must overlap border
+    elevation: 1, // Needed for android
+    shadowColor: 'white', // Same as background color because elevation: 1 creates a shadow that we don't want
+    // Needed to be able to precisely overlap label with border
+    marginBottom: -20,
+    marginLeft: 20, // Vertical position of label. Eyeball it to see where label intersects border.
   },
   header: {
     paddingBottom: 30,
@@ -132,7 +151,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 30,
     marginLeft: 10,
-    marginBottom: 20,
   },
   action: {
     marginLeft: 7,
