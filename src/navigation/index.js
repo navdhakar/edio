@@ -4,6 +4,7 @@ import Authentication from '../components/Authentication/Authentication';
 import Login from '../screens/Login/Login';
 // import StudentSignup from '../screens/StudentSignup/index';
 import StudentInfo from '../screens/StudentSignup/Studentinfo';
+import EducationalInfo from '../screens/StudentSignup/Educationalinfo';
 
 import MobileNo from '../screens/Login/Mobile';
 import Otp from '../screens/Login/Otp';
@@ -29,6 +30,8 @@ const RootNavigation = () => {
         <Stack.Screen name="Otp" component={Otp} />
         <Stack.Screen name="MobileNo" component={MobileNo} />
         <Stack.Screen name="StudentInfo" component={StudentInfo} />
+        <Stack.Screen name="EducationalInfo" component={EducationalInfo} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

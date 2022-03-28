@@ -5,38 +5,7 @@ export default function Home() {
     <View style={styles.container}>
       <Text style={styles.header}>Homescreen</Text>
       <View style={styles.boxContainer}>
-        <View style={styles.box}>
-          <View style={styles.leftSection}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>13 jun 22</Text>
-            <View
-              style={{
-                borderBottomColor: 'grey',
-                borderBottomWidth: 1,
-              }}
-            />
-            <Text style={{fontWeight: 'bold'}}>7pm - 8pm</Text>
-          </View>
-          <View
-            style={{
-              marginLeft: '15%',
-              marginTop: '5%',
-              marginBottom: '5%',
-              borderRightColor: 'grey',
-              borderRightWidth: 1,
-            }}
-          />
-          <View style={styles.rightSection}>
-            <View style={styles.Rtop}>
-              <Text style={{fontWeight: 'bold'}}>Subject name</Text>
-              <Text style={{fontWeight: 'bold', marginLeft: '10%'}}>
-                HH:MM:SS
-              </Text>
-            </View>
-            <View style={styles.Rbottom}>
-              <Text style={{fontWeight: 'bold'}}>Test series Poster</Text>
-            </View>
-          </View>
-        </View>
+        <View style={styles.box}></View>
         <View style={styles.box}>
           <View style={styles.leftSection}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>13 jun 22</Text>

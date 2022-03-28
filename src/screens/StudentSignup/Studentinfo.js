@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import DropDownPicker from 'react-native-dropdown-picker';
+
 import {
   View,
   Text,
@@ -21,6 +23,12 @@ const signinvalidationSchema = Yup.object().shape({
   PhoneNumber: Yup.string().required().min(10, 'not strong password'),
 });
 export default function StudentInfo({navigation}) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Male', value: 'Male'},
+    {label: 'Female', value: 'Female'},
+  ]);
   const {colors} = useTheme();
   const [fullname_value, setfullname] = useState('');
   const [gender_value, setgender] = useState('');
@@ -87,7 +95,7 @@ export default function StudentInfo({navigation}) {
               <Text>{fullname_value}</Text>
             </View>
             <View
-              style={styles.action}
+              style={[styles.action, {borderWidth: 0}]}
               onFocus={() => {
                 setgender('enter your gender');
               }}>
@@ -101,19 +109,19 @@ export default function StudentInfo({navigation}) {
               </View>
               <TouchableOpacity style={styles.mobilenoani}>
                 <View style={{flex: 6, justifyContent: 'center'}}>
-                  <TextInput
+                  <DropDownPicker
+                    open={open}
+                    value={value}
                     placeholder="Gender"
-                    placeholderTextColor="#666666"
-                    keyboardType="numeric"
-                    style={[
-                      styles.textInput,
-                      {
-                        color: colors.text,
-                      },
-                    ]}
-                    autoCapitalize="none"
-                    onChangeText={props.handleChange('PhoneNumber')}
-                    value={props.values.PhoneNumber}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    style={{
+                      borderColor: '#660066',
+                      height: 60,
+                      backgroundColor: 'rgba(255, 255, 255, 0.0)',
+                    }}
                   />
                 </View>
               </TouchableOpacity>
@@ -145,7 +153,6 @@ export default function StudentInfo({navigation}) {
                   <TextInput
                     placeholder="Date of birth"
                     placeholderTextColor="#666666"
-                    keyboardType="numeric"
                     style={[
                       styles.textInput,
                       {
@@ -216,7 +223,7 @@ export default function StudentInfo({navigation}) {
       <View style={styles.button}>
         <TouchableOpacity
           style={[styles.signIn, {justifyContent: 'center'}]}
-          onPress={() => navigation.navigate('Otp')}>
+          onPress={() => navigation.navigate('EducationalInfo')}>
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
             style={[styles.signIN, {justifyContent: 'center'}]}>
@@ -247,7 +254,7 @@ const styles = StyleSheet.create({
     // Amount of spacing between border and first/last letter
     // How far right do you want the label to start
     zIndex: 1, // Label must overlap border
-    elevation: 1, // Needed for android
+    // Needed for android
     shadowColor: 'white', // Same as background color because elevation: 1 creates a shadow that we don't want
     // Needed to be able to precisely overlap label with border
     marginTop: -10,
