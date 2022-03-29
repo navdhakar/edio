@@ -25,6 +25,9 @@ const signinvalidationSchema = Yup.object().shape({
 export default function StudentInfo({navigation}) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [dob, hidedob] = useState(false);
+  const dobdisplay = dob ? styles.dobhide : styles.dobshow;
+
   const [items, setItems] = useState([
     {label: 'Male', value: 'Male'},
     {label: 'Female', value: 'Female'},
@@ -77,7 +80,6 @@ export default function StudentInfo({navigation}) {
                   <TextInput
                     placeholder="Full name"
                     placeholderTextColor="#666666"
-                    keyboardType="numeric"
                     style={[
                       styles.textInput,
                       {
@@ -98,7 +100,8 @@ export default function StudentInfo({navigation}) {
               style={[styles.action, {borderWidth: 0}]}
               onFocus={() => {
                 setgender('enter your gender');
-              }}>
+              }}
+              onPress={() => hidedob(true)}>
               <View style={styles.labelContainer}>
                 <Text
                   style={{
@@ -107,7 +110,9 @@ export default function StudentInfo({navigation}) {
                   Gender
                 </Text>
               </View>
-              <TouchableOpacity style={styles.mobilenoani}>
+              <TouchableOpacity
+                style={styles.mobilenoani}
+                onPress={() => hidedob(true)}>
                 <View style={{flex: 6, justifyContent: 'center'}}>
                   <DropDownPicker
                     open={open}
@@ -117,11 +122,13 @@ export default function StudentInfo({navigation}) {
                     setOpen={setOpen}
                     setValue={setValue}
                     setItems={setItems}
+                    defaultValue="item1"
                     style={{
                       borderColor: '#660066',
                       height: 60,
-                      backgroundColor: 'rgba(255, 255, 255, 0.0)',
+                      backgroundColor: '#fffff',
                     }}
+                    itemSeparator={false}
                   />
                 </View>
               </TouchableOpacity>
@@ -154,7 +161,7 @@ export default function StudentInfo({navigation}) {
                     placeholder="Date of birth"
                     placeholderTextColor="#666666"
                     style={[
-                      styles.textInput,
+                      dobdisplay,
                       {
                         color: colors.text,
                       },
@@ -196,7 +203,6 @@ export default function StudentInfo({navigation}) {
                   <TextInput
                     placeholder="City or Town"
                     placeholderTextColor="#666666"
-                    keyboardType="numeric"
                     style={[
                       styles.textInput,
                       {
@@ -322,6 +328,16 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 6,
     color: '#660066',
+    fontSize: 16,
+  },
+  dobshow: {
+    flex: 6,
+    color: '#660066',
+    fontSize: 16,
+  },
+  dobhide: {
+    flex: 6,
+    color: '#fffff',
     fontSize: 16,
   },
   errorMsg: {

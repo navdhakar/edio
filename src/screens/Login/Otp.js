@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,11 @@ import * as Yup from 'yup';
 import {useTheme} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+const RESEND_OTP_TIME_LIMIT = 30;
+const AUTO_SUBMIT_OTP_TIME_LIMIT = 4;
 
+let resendOtpTimerInterval;
+let autoSubmitOtpTimerInterval;
 const signinvalidationSchema = Yup.object().shape({
   code1: Yup.string().required().min(1, 'not strong password'),
   code2: Yup.string().required().min(1, 'not strong password'),
@@ -27,13 +31,96 @@ export default function Otp({navigation}) {
   const {colors} = useTheme();
   const [focus, setfocus] = useState(false);
   const [verify, setverify] = useState(false);
+  const [otpArray, setOtpArray] = useState(['', '', '', '']);
+  const [submittingOtp, setSubmittingOtp] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(
+    RESEND_OTP_TIME_LIMIT,
+  );
+  const inputbox = [
+    firstTextInputRef,
+    secondTextInputRef,
+    thirdTextInputRef,
+    fourthTextInputRef,
+  ];
   const customVerify = verify ? styles.validverifystyle : styles.verifystyle;
   const customStyle = focus ? styles.actionfocus : styles.action;
-  const code1 = useRef();
-  const code2 = useRef();
-  const code3 = useRef();
-  const code4 = useRef();
+  const refCallback = textInputRef => node => {
+    textInputRef.current = node;
+  };
+  const firstTextInputRef = useRef();
+  const secondTextInputRef = useRef();
+  const thirdTextInputRef = useRef();
+  const fourthTextInputRef = useRef();
+  useEffect(() => {
+    startResendOtpTimer();
 
+    return () => {
+      if (resendOtpTimerInterval) {
+        clearInterval(resendOtpTimerInterval);
+      }
+    };
+  }, [resendButtonDisabledTime]);
+
+  const startResendOtpTimer = () => {
+    if (resendOtpTimerInterval) {
+      clearInterval(resendOtpTimerInterval);
+    }
+    resendOtpTimerInterval = setInterval(() => {
+      if (resendButtonDisabledTime <= 0) {
+        clearInterval(resendOtpTimerInterval);
+      } else {
+        setResendButtonDisabledTime(resendButtonDisabledTime - 1);
+      }
+    }, 1000);
+  };
+  const onOtpChange = index => {
+    return value => {
+      if (isNaN(Number(value))) {
+        // do nothing when a non digit is pressed
+        return;
+      }
+      const otpArrayCopy = otpArray.concat();
+      otpArrayCopy[index] = value;
+      setOtpArray(otpArrayCopy);
+
+      // auto focus to next InputText if value is not blank
+      if (value !== '') {
+        if (index === 0) {
+          secondTextInputRef.current.focus();
+        } else if (index === 1) {
+          thirdTextInputRef.current.focus();
+        } else if (index === 2) {
+          fourthTextInputRef.current.focus();
+        }
+      }
+    };
+  };
+  const onOtpKeyPress = index => {
+    return ({nativeEvent: {key: value}}) => {
+      // auto focus to previous InputText if value is blank and existing value is also blank
+      if (value === 'Backspace' && otpArray[index] === '') {
+        if (index === 1) {
+          firstTextInputRef.current.focus();
+        } else if (index === 2) {
+          secondTextInputRef.current.focus();
+        } else if (index === 3) {
+          thirdTextInputRef.current.focus();
+        }
+
+        /**
+         * clear the focused text box as well only on Android because on mweb onOtpChange will be also called
+         * doing this thing for us
+         * todo check this behaviour on ios
+         */
+        if (isAndroid && index > 0) {
+          const otpArrayCopy = otpArray.concat();
+          otpArrayCopy[index - 1] = ''; // clear the previous box which will be in focus
+          setOtpArray(otpArrayCopy);
+        }
+      }
+    };
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -50,101 +137,35 @@ export default function Otp({navigation}) {
         }}>
         {props => (
           <View style={{flexDirection: 'row', width: '80%'}}>
-            <View style={customStyle} onFocus={() => setfocus(true)}>
-              <TouchableOpacity style={styles.mobilenoani}>
-                <TextInput
-                  placeholderTextColor="#666666"
-                  keyboardType="numeric"
-                  style={[
-                    styles.textInput1,
-                    {
-                      color: colors.text,
-                    },
-                  ]}
-                  autoCapitalize="none"
-                  onChangeText={props.handleChange('code1')}
-                  value={props.values.code1}
-                  maxLength={1}
-                  ref={code1}
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    code2.current.focus();
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={customStyle} onFocus={() => setfocus(true)}>
-              <TouchableOpacity style={styles.mobilenoani}>
-                <TextInput
-                  placeholderTextColor="#666666"
-                  keyboardType="numeric"
-                  style={[
-                    styles.textInput2,
-                    {
-                      color: colors.text,
-                    },
-                  ]}
-                  autoCapitalize="none"
-                  onChangeText={props.handleChange('code2')}
-                  value={props.values.code2}
-                  maxLength={1}
-                  ref={code2}
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    code3.current.focus();
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={customStyle} onFocus={() => setfocus(true)}>
-              <TouchableOpacity style={styles.mobilenoani}>
-                <TextInput
-                  placeholderTextColor="#666666"
-                  keyboardType="numeric"
-                  style={[
-                    styles.textInput3,
-                    {
-                      color: colors.text,
-                    },
-                  ]}
-                  autoCapitalize="none"
-                  onChangeText={props.handleChange('code3')}
-                  value={props.values.code3}
-                  maxLength={1}
-                  ref={code3}
-                  returnKeyType="next"
-                  onSubmitEditing={() => {
-                    code4.current.focus();
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={customStyle} onFocus={() => setfocus(true)}>
-              <TouchableOpacity
-                style={styles.mobilenoani}
-                onPress={() => {
-                  console.log(placeholder_value);
-                }}
-                onFocus={() => {
-                  console.log(placeholder_value);
-                }}>
-                <TextInput
-                  placeholderTextColor="#666666"
-                  keyboardType="numeric"
-                  style={[
-                    styles.textInput4,
-                    {
-                      color: colors.text,
-                    },
-                  ]}
-                  autoCapitalize="none"
-                  onChangeText={props.handleChange('code4')}
-                  value={props.values.code4}
-                  maxLength={1}
-                  ref={code4}
-                />
-              </TouchableOpacity>
-            </View>
+            {[
+              firstTextInputRef,
+              secondTextInputRef,
+              thirdTextInputRef,
+              fourthTextInputRef,
+            ].map((textInputRef, index) => (
+              <View style={customStyle} onFocus={() => setfocus(true)}>
+                <TouchableOpacity style={styles.mobilenoani}>
+                  <TextInput
+                    value={otpArray[index]}
+                    placeholderTextColor="#666666"
+                    keyboardType="numeric"
+                    style={[
+                      styles.textInput1,
+                      {
+                        color: colors.text,
+                      },
+                    ]}
+                    autoCapitalize="none"
+                    maxLength={1}
+                    returnKeyType="next"
+                    onKeyPress={onOtpKeyPress(index)}
+                    onChangeText={onOtpChange(index)}
+                    ref={refCallback(textInputRef)}
+                    key={index}
+                  />
+                </TouchableOpacity>
+              </View>
+            ))}
           </View>
         )}
       </Formik>
@@ -159,7 +180,11 @@ export default function Otp({navigation}) {
           paddingTop: 20,
         }}>
         Resend OTP in{' '}
-        <Text style={{fontWeight: '600', color: 'black'}}>00:30</Text>
+        {resendButtonDisabledTime > 0 ? (
+          <Text style={{fontWeight: '600', color: 'black'}}>
+            {resendButtonDisabledTime}
+          </Text>
+        ) : null}
       </Text>
       <View style={styles.button}>
         <TouchableOpacity
@@ -238,7 +263,7 @@ const styles = StyleSheet.create({
     marginRight: 7,
     marginTop: 10,
     borderWidth: 1,
-    borderLeftWidth: 3,
+    borderBottomWidth: 5,
     borderColor: '#660066',
     borderRadius: 10,
     height: 60,

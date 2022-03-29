@@ -100,13 +100,17 @@ const SignInScreen = ({navigation}) => {
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
       <View style={styles.show_text}>
-        <SliderBox
-          images={illustration}
-          sliderBoxHeight={475}
-          dotColor="#660066"
-          inactiveDotColor="#D1D5DB"
-          autoplay={true}
-        />
+        <View>
+          <SliderBox
+            images={illustration}
+            dotColor="#660066"
+            inactiveDotColor="#D1D5DB"
+            autoplay={true}
+            circleLoop={true}
+            sliderBoxHeight={430}
+            resizeMode="contain"
+          />
+        </View>
       </View>
       <Animatable.View animation="fadeInUpBig" style={[styles.footer]}>
         {/* <Formik
@@ -289,7 +293,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontWeight: 600,
     fontSize: 24,
-    height: '50%',
+
     justifyContent: 'flex-end',
   },
   header: {
