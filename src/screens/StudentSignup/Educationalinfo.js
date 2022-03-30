@@ -23,17 +23,30 @@ const signinvalidationSchema = Yup.object().shape({
   PhoneNumber: Yup.string().required().min(10, 'not strong password'),
 });
 export default function StudentInfo({navigation}) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Male', value: 'Male'},
-    {label: 'Female', value: 'Female'},
+  const [open1, setOpen1] = useState(false);
+  const [value1, setValue1] = useState(null);
+  const [items1, setItems1] = useState([
+    {label: 'CBSE', value: 'CBSE'},
+    {label: 'RBSE', value: 'RBSE'},
+  ]);
+  const [open2, setOpen2] = useState(false);
+  const [value2, setValue2] = useState(null);
+  const [items2, setItems2] = useState([
+    {label: 'class 10', value: 'class 10'},
+    {label: 'class 11', value: 'class 11'},
+    {label: 'class 12', value: 'class 12'},
+  ]);
+  const [open3, setOpen3] = useState(false);
+  const [value3, setValue3] = useState(null);
+  const [items3, setItems3] = useState([
+    {label: 'English', value: 'English'},
+    {label: 'Hindi', value: 'Hindi'},
+    {label: 'Other', value: 'Other'},
   ]);
   const {colors} = useTheme();
-  const [fullname_value, setfullname] = useState('');
-  const [gender_value, setgender] = useState('');
-  const [dob_value, setdob] = useState('');
-  const [city_value, setcity] = useState('');
+  const [board, setboard] = useState('');
+  const [class_, setclass] = useState('');
+  const [medium, setmedium] = useState('');
 
   return (
     <View style={styles.container}>
@@ -47,10 +60,9 @@ export default function StudentInfo({navigation}) {
       </View>
       <Formik
         initialValues={{
-          FullName: '',
-          Gender: '',
-          DateofBirth: '',
-          CityorTown: '',
+          Board: '',
+          Class: '',
+          Medium: '',
         }}
         validationSchema={signinvalidationSchema}
         onSubmit={(values, actions) => {
@@ -61,7 +73,7 @@ export default function StudentInfo({navigation}) {
             <View
               style={[styles.action, {borderWidth: 0}]}
               onFocus={() => {
-                setgender('enter your gender');
+                setgender('');
               }}>
               <View style={styles.labelContainer}>
                 <Text
@@ -74,13 +86,13 @@ export default function StudentInfo({navigation}) {
               <TouchableOpacity style={styles.mobilenoani}>
                 <View style={{flex: 6, justifyContent: 'center'}}>
                   <DropDownPicker
-                    open={open}
-                    value={value}
+                    open={open1}
+                    value={value1}
                     placeholder="Class"
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    items={items1}
+                    setOpen={setOpen1}
+                    setValue={setValue1}
+                    setItems={setItems1}
                     style={{
                       borderColor: '#660066',
                       height: 60,
@@ -90,13 +102,13 @@ export default function StudentInfo({navigation}) {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{marginLeft: 10}}>
+            {/* <View style={{marginLeft: 10}}>
               <Text>{fullname_value}</Text>
-            </View>
+            </View> */}
             <View
               style={[styles.action, {borderWidth: 0}]}
               onFocus={() => {
-                setgender('enter your gender');
+                setgender('');
               }}>
               <View style={styles.labelContainer}>
                 <Text
@@ -109,13 +121,13 @@ export default function StudentInfo({navigation}) {
               <TouchableOpacity style={styles.mobilenoani}>
                 <View style={{flex: 6, justifyContent: 'center'}}>
                   <DropDownPicker
-                    open={open}
-                    value={value}
+                    open={open2}
+                    value={value2}
                     placeholder="Class"
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    items={items2}
+                    setOpen={setOpen2}
+                    setValue={setValue2}
+                    setItems={setItems2}
                     style={{
                       borderColor: '#660066',
                       height: 60,
@@ -125,9 +137,9 @@ export default function StudentInfo({navigation}) {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{marginLeft: 10}}>
+            {/* <View style={{marginLeft: 10}}>
               <Text>{gender_value}</Text>
-            </View>
+            </View> */}
             <View
               style={[styles.action, {borderWidth: 0}]}
               onFocus={() => {
@@ -144,13 +156,13 @@ export default function StudentInfo({navigation}) {
               <TouchableOpacity style={styles.mobilenoani}>
                 <View style={{flex: 6, justifyContent: 'center'}}>
                   <DropDownPicker
-                    open={open}
-                    value={value}
+                    open={open3}
+                    value={value3}
                     placeholder="Medium"
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    items={items3}
+                    setOpen={setOpen3}
+                    setValue={setValue3}
+                    setItems={setItems3}
                     style={{
                       borderColor: '#660066',
                       height: 60,
@@ -160,9 +172,9 @@ export default function StudentInfo({navigation}) {
                 </View>
               </TouchableOpacity>
             </View>
-            <View style={{marginLeft: 10}}>
+            {/* <View style={{marginLeft: 10}}>
               <Text>{dob_value}</Text>
-            </View>
+            </View> */}
           </View>
         )}
       </Formik>
