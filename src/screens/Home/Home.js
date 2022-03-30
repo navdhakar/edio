@@ -1,194 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import HomeTemplate from './HomeTemplate';
 export default function Home() {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Homescreen</Text>
       <View style={styles.boxContainer}>
-        <View style={styles.box}>
-          <View style={styles.leftSection}>
-            <Text>National Talent Test series</Text>
-            <Text
-              style={{
-                color: '#CA5259',
-                fontWeight: '900',
-                fontSize: 24,
-                fontFamily: 'Quicksand',
-                fontStyle: 'normal',
-              }}>
-              Physics
-            </Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/carddate.png')} />
-              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
-              <Image
-                source={require('../../assets/icons/cardtime.png')}
-                style={{marginLeft: 6}}
-              />
-              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/cardprize.png')} />
-              <Text
-                style={{
-                  color: '#FF9C1A',
-                  fontWeight: '700',
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontStyle: 'normal',
-                  marginLeft: 6,
-                }}>
-                Reward: ₹15,000
-              </Text>
-            </View>
-            <Text>Registration fee ₹299</Text>
-          </View>
-          <View style={styles.rightSection}>
-            <Image source={require('../../assets/icons/cardlive.png')} />
-            <Image
-              source={require('../../assets/icons/cardatom.png')}
-              style={{marginTop: 60}}
-            />
-          </View>
-        </View>
-        <View style={styles.box}>
-          <View style={styles.leftSection}>
-            <Text>National Talent Test series</Text>
-            <Text
-              style={{
-                color: '#CA5259',
-                fontWeight: '900',
-                fontSize: 24,
-                fontFamily: 'Quicksand',
-                fontStyle: 'normal',
-              }}>
-              Physics
-            </Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/carddate.png')} />
-              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
-              <Image
-                source={require('../../assets/icons/cardtime.png')}
-                style={{marginLeft: 6}}
-              />
-              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/cardprize.png')} />
-              <Text
-                style={{
-                  color: '#FF9C1A',
-                  fontWeight: '700',
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontStyle: 'normal',
-                  marginLeft: 6,
-                }}>
-                Reward: ₹15,000
-              </Text>
-            </View>
-            <Text>Registration fee ₹299</Text>
-          </View>
-          <View style={styles.rightSection}>
-            <Image source={require('../../assets/icons/cardlive.png')} />
-            <Image
-              source={require('../../assets/icons/cardatom.png')}
-              style={{marginTop: 60}}
-            />
-          </View>
-        </View>
-        <View style={styles.box}>
-          <View style={styles.leftSection}>
-            <Text>National Talent Test series</Text>
-            <Text
-              style={{
-                color: '#CA5259',
-                fontWeight: '900',
-                fontSize: 24,
-                fontFamily: 'Quicksand',
-                fontStyle: 'normal',
-              }}>
-              Physics
-            </Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/carddate.png')} />
-              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
-              <Image
-                source={require('../../assets/icons/cardtime.png')}
-                style={{marginLeft: 6}}
-              />
-              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/cardprize.png')} />
-              <Text
-                style={{
-                  color: '#FF9C1A',
-                  fontWeight: '700',
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontStyle: 'normal',
-                  marginLeft: 6,
-                }}>
-                Reward: ₹15,000
-              </Text>
-            </View>
-            <Text>Registration fee ₹299</Text>
-          </View>
-          <View style={styles.rightSection}>
-            <Image source={require('../../assets/icons/cardlive.png')} />
-            <Image
-              source={require('../../assets/icons/cardatom.png')}
-              style={{marginTop: 60}}
-            />
-          </View>
-        </View>
-        <View style={styles.box}>
-          <View style={styles.leftSection}>
-            <Text>National Talent Test series</Text>
-            <Text
-              style={{
-                color: '#CA5259',
-                fontWeight: '900',
-                fontSize: 24,
-                fontFamily: 'Quicksand',
-                fontStyle: 'normal',
-              }}>
-              Physics
-            </Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/carddate.png')} />
-              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
-              <Image
-                source={require('../../assets/icons/cardtime.png')}
-                style={{marginLeft: 6}}
-              />
-              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image source={require('../../assets/icons/cardprize.png')} />
-              <Text
-                style={{
-                  color: '#FF9C1A',
-                  fontWeight: '700',
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontStyle: 'normal',
-                  marginLeft: 6,
-                }}>
-                Reward: ₹15,000
-              </Text>
-            </View>
-            <Text>Registration fee ₹299</Text>
-          </View>
-          <View style={styles.rightSection}>
-            <Image source={require('../../assets/icons/cardlive.png')} />
-            <Image
-              source={require('../../assets/icons/cardatom.png')}
-              style={{marginTop: 60}}
-            />
-          </View>
-        </View>
+        <HomeTemplate type={'physics'} />
+        <HomeTemplate type={'chemistry'} />
+        <HomeTemplate type={'maths'} />
       </View>
     </View>
   );
@@ -240,6 +60,7 @@ const styles = StyleSheet.create({
     marginLeft: '5%',
     flex: 4,
     justifyContent: 'flex-start',
+    marginTop: 10,
   },
   rightSection: {
     marginLeft: '5%',
