@@ -96,6 +96,8 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar animated={true} backgroundColor="#660066" />
+
       <View style={styles.header}>
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>

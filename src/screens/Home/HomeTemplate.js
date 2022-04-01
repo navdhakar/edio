@@ -73,7 +73,7 @@ export default function HomeTemplate({type}) {
             <Text>National Talent Test series</Text>
             <Text
               style={{
-                color: '#CA5259',
+                color: '#8D5DA7',
                 fontWeight: '900',
                 fontSize: 24,
                 fontFamily: 'Quicksand',
@@ -136,14 +136,14 @@ export default function HomeTemplate({type}) {
             <Text>National Talent Test series</Text>
             <Text
               style={{
-                color: '#CA5259',
+                color: '#589FD3',
                 fontWeight: '900',
                 fontSize: 24,
                 fontFamily: 'Quicksand',
                 fontStyle: 'normal',
                 marginTop: 5,
               }}>
-              Maths
+              Mathematics
             </Text>
             <View
               style={{
@@ -192,10 +192,134 @@ export default function HomeTemplate({type}) {
           </View>
         </View>
       );
-    } else if (type == 'maths') {
-      return null;
-    } else if (type == 'biology') {
-      return null;
+    } else if (type == 'logical') {
+      return (
+        <View style={styles.boxlogical}>
+          <View style={styles.leftSection}>
+            <Text>National Talent Test series</Text>
+            <Text
+              style={{
+                color: '#CA5259',
+                fontWeight: '900',
+                fontSize: 24,
+                fontFamily: 'Quicksand',
+                fontStyle: 'normal',
+                marginTop: 5,
+
+                width: '100%',
+              }}>
+              Logical Reasoning
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 5,
+              }}>
+              <Image source={require('../../assets/icons/carddate.png')} />
+              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
+              <Image
+                source={require('../../assets/icons/cardtime.png')}
+                style={{marginLeft: 6}}
+              />
+              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 5,
+              }}>
+              <Image source={require('../../assets/icons/cardprize.png')} />
+              <Text
+                style={{
+                  color: '#FF9C1A',
+                  fontWeight: '700',
+                  fontSize: 16,
+                  fontFamily: 'Roboto',
+                  fontStyle: 'normal',
+                  marginLeft: 6,
+                }}>
+                Reward: ₹15,000
+              </Text>
+            </View>
+            <Text style={{marginTop: 5}}>Registration fee ₹299</Text>
+          </View>
+          <View style={styles.rightSection}>
+            <Image
+              style={{marginTop: 5}}
+              source={require('../../assets/icons/cardlive.png')}
+            />
+            <Image
+              source={require('../../assets/icons/cardlogical.png')}
+              style={{marginTop: 70, marginBottom: 12}}
+            />
+          </View>
+        </View>
+      );
+    } else if (type == 'english') {
+      return (
+        <View style={styles.boxenglish}>
+          <View style={styles.leftSection}>
+            <Text>National Talent Test series</Text>
+            <Text
+              style={{
+                color: '#1C5253CC',
+                fontWeight: '900',
+                fontSize: 24,
+                fontFamily: 'Quicksand',
+                fontStyle: 'normal',
+                marginTop: 5,
+              }}>
+              English
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 5,
+              }}>
+              <Image source={require('../../assets/icons/cardenglish.png')} />
+              <Text style={{marginLeft: 6}}>Wed, 23 March 2022</Text>
+              <Image
+                source={require('../../assets/icons/cardtime.png')}
+                style={{marginLeft: 6}}
+              />
+              <Text style={{marginLeft: 6}}>7:00 - 8:00Pm</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 5,
+              }}>
+              <Image source={require('../../assets/icons/cardprize.png')} />
+              <Text
+                style={{
+                  color: '#FF9C1A',
+                  fontWeight: '700',
+                  fontSize: 16,
+                  fontFamily: 'Roboto',
+                  fontStyle: 'normal',
+                  marginLeft: 6,
+                }}>
+                Reward: ₹15,000
+              </Text>
+            </View>
+            <Text style={{marginTop: 5}}>Registration fee ₹299</Text>
+          </View>
+          <View style={styles.rightSection}>
+            <Image
+              style={{marginTop: 5}}
+              source={require('../../assets/icons/cardlive.png')}
+            />
+            <Image
+              source={require('../../assets/icons/cardparabola.png')}
+              style={{marginTop: 70, marginBottom: 12}}
+            />
+          </View>
+        </View>
+      );
     }
   }
   return (
@@ -246,6 +370,24 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#589FD329',
     borderLeftColor: '#589FD3D6',
+    borderLeftWidth: 16,
+  },
+  boxlogical: {
+    flexDirection: 'row',
+    marginBottom: '10%',
+    width: '100%',
+    borderRadius: 20,
+    backgroundColor: '#C9521D29',
+    borderLeftColor: '#C9521DD6',
+    borderLeftWidth: 16,
+  },
+  boxenglish: {
+    flexDirection: 'row',
+    marginBottom: '10%',
+    width: '100%',
+    borderRadius: 20,
+    backgroundColor: '#1C525329',
+    borderLeftColor: '#1C5253D6',
     borderLeftWidth: 16,
   },
   profilePicture: {

@@ -1,15 +1,61 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
 import HomeTemplate from './HomeTemplate';
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Homescreen</Text>
-      <View style={styles.boxContainer}>
+      <StatusBar animated={true} backgroundColor="#660066" />
+      <LinearGradient
+        colors={['#660066', '#330066']}
+        style={{
+          flex: 0.08,
+          width: '100%',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Image
+          source={require('../../assets/icons/edio_home_logo.png')}
+          resizeMode={'contain'}
+          style={{
+            width: '50%',
+            height: '50%',
+
+            flex: 1,
+          }}
+        />
+        <Text
+          style={{
+            color: '#fff',
+            fontSize: 24,
+            fontWeight: '700',
+            fontFamily: 'Quicksand',
+            fontStyle: 'normal',
+            flex: 4,
+          }}>
+          Prove Your Talent
+        </Text>
+      </LinearGradient>
+      <ScrollView
+        style={styles.boxContainer}
+        contentContainerStyle={{justifyContent: 'center'}}
+        showsVerticalScrollIndicator={false}>
         <HomeTemplate type={'physics'} />
         <HomeTemplate type={'chemistry'} />
         <HomeTemplate type={'maths'} />
-      </View>
+        <HomeTemplate type={'physics'} />
+        <HomeTemplate type={'chemistry'} />
+        <HomeTemplate type={'maths'} />
+      </ScrollView>
     </View>
   );
 }
@@ -25,10 +71,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   boxContainer: {
-    flex: 2,
+    flex: 0.8,
     height: Dimensions.get('window').height,
     width: '90%',
-    justifyContent: 'center',
+    marginTop: 20,
   },
   box: {
     flexDirection: 'row',
