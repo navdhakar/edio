@@ -49,6 +49,7 @@ export default function Home() {
         style={styles.boxContainer}
         contentContainerStyle={{justifyContent: 'center'}}
         showsVerticalScrollIndicator={false}>
+        <HomeTemplate type={'anytime'} />
         <HomeTemplate type={'physics'} />
         <HomeTemplate type={'chemistry'} />
         <HomeTemplate type={'maths'} />
