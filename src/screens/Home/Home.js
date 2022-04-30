@@ -8,10 +8,11 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
 import HomeTemplate from './HomeTemplate';
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={styles.container}>
       <StatusBar animated={true} backgroundColor="#660066" />
@@ -23,27 +24,46 @@ export default function Home() {
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Image
-          source={require('../../assets/icons/edio_home_logo.png')}
-          resizeMode={'contain'}
+        <View
           style={{
-            width: '50%',
-            height: '50%',
-
             flex: 1,
-          }}
-        />
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: 24,
-            fontWeight: '700',
-            fontFamily: 'Quicksand',
-            fontStyle: 'normal',
-            flex: 4,
+            width: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
-          Prove Your Talent
-        </Text>
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+
+              flexDirection: 'row',
+            }}
+            onPress={() => navigation.openDrawer()}>
+            <Image
+              source={require('../../assets/icons/edio_home_logo.png')}
+              resizeMode={'contain'}
+              style={{
+                width: '50%',
+                height: '50%',
+              }}
+            />
+          </TouchableOpacity>
+
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 24,
+              fontWeight: '700',
+              fontFamily: 'Quicksand',
+              fontStyle: 'normal',
+              flex: 4,
+
+              marginLeft: -90,
+            }}>
+            Prove Your Talent
+          </Text>
+        </View>
       </LinearGradient>
       <ScrollView
         style={styles.boxContainer}

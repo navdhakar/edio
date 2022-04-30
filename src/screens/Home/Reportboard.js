@@ -1,9 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
-export default function Reportboard() {
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+export default function Reportboard({navigation}) {
   return (
     <View style={styles.container}>
       <Text>Reportboard</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Bankdetails')}>
+        <Text>Bankdetails</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -44,7 +44,7 @@ export default function HomeTemplate({type}) {
                     color: '#fff',
                   },
                 ]}>
-                SEND OTP
+                SUBMIT
               </Text>
             </LinearGradient>
           </View>

@@ -78,13 +78,13 @@ const Bottomtabnav = () => {
                   justifyContent: 'center',
                 }}>
                 <Image
-                  style={{color: isFocused ? '#fff' : '#222'}}
-                  source={tab_icon[index]}
-                  resizeMode={'contain'}
                   style={{
+                    color: isFocused ? '#fff' : '#222',
                     width: '70%',
                     height: '70%',
                   }}
+                  source={tab_icon[index]}
+                  resizeMode={'contain'}
                 />
               </TouchableOpacity>
             );
