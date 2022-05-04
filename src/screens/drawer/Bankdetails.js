@@ -16,22 +16,24 @@ export default function Bankdetails({navigation}) {
       <LinearGradient
         colors={['#660066', '#330066']}
         style={{
-          flex: 0.08,
           width: '100%',
           flexDirection: 'row',
           alignItems: 'center',
-          flex: 0.2,
+          height: 50,
         }}>
-        <Image
-          source={require('../../assets/icons/Back.png')}
-          resizeMode={'contain'}
-          style={{
-            width: '30%',
-            height: '30%',
-
-            flex: 0.5,
-          }}
-        />
+        <TouchableOpacity
+          style={{flex: 0.5}}
+          onPress={() => navigation.goBack()}>
+          <Image
+            source={require('../../assets/icons/Back.png')}
+            resizeMode={'contain'}
+            style={{
+              width: '70%',
+              height: '35%',
+              marginLeft: 1,
+            }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: '#fff',
@@ -134,7 +136,9 @@ export default function Bankdetails({navigation}) {
             }}
           />
           <Text style={styles.payment_methods}>Bank Account</Text>
-          <TouchableOpacity style={{flex: 0.2}}>
+          <TouchableOpacity
+            style={{flex: 0.2}}
+            onPress={() => navigation.navigate('Linkbank')}>
             <Image
               source={require('../../assets/icons/link_bank.png')}
               resizeMode={'contain'}

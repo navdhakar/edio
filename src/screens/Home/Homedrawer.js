@@ -15,6 +15,10 @@ import Bankdetails from '../drawer/Bankdetails';
 import Withdrawal from '../drawer/Withdrawal';
 import Bottomtabnav from '../../navigation/Home/Bottomtab';
 import Documentverification from '../drawer/Documentverification';
+import Panverification from '../drawer/Panverification';
+import Adhaarverification from '../drawer/Adhaarverification';
+import Verificationstatus from '../drawer/Verificationstatus';
+import Linkbank from '../drawer/Bank/Linkbank';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 const Stack = createStackNavigator();
 
@@ -31,6 +35,11 @@ const Homedrawer = () => {
       <Stack.Screen name="EducationalInfo" component={EducationalInfo} />
       <Stack.Screen name="Bankdetails" component={Bankdetails} />
       <Stack.Screen name="Withdrawal" component={Withdrawal} />
+      <Stack.Screen name="Panverification" component={Panverification} />
+      <Stack.Screen name="Adhaarverification" component={Adhaarverification} />
+      <Stack.Screen name="Verificationstatus" component={Verificationstatus} />
+      <Stack.Screen name="Linkbank" component={Linkbank} />
+
       <Stack.Screen
         name="Documentverification"
         component={Documentverification}

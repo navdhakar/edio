@@ -33,26 +33,30 @@ export default function Withdrawal({navigation}) {
         This step is taken to prevent fraud/cheating on EDIO.
       </Text>
       <View style={{flex: 0.2, width: '100%'}}>
-        <View style={styles.button}>
+        <View style={[styles.button]}>
           <TouchableOpacity
-            style={[styles.signIn, {justifyContent: 'center'}]}
+            style={[
+              styles.signIn,
+              {
+                justifyContent: 'center',
+                borderWidth: 1,
+                borderColor: '#660066',
+                borderRadius: 25,
+              },
+            ]}
             onPress={() => navigation.navigate('StudentInfo')}>
-            <LinearGradient
-              colors={['#660066CC', '#660066CC']}
-              style={[styles.signIN, {justifyContent: 'center'}]}>
-              <Text
-                style={[
-                  styles.textSign,
-                  {
-                    color: '#fff',
-                  },
-                ]}>
-                Not Now
-              </Text>
-            </LinearGradient>
+            <Text
+              style={[
+                styles.textSign,
+                {
+                  color: '#660066',
+                },
+              ]}>
+              NOT NOW
+            </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.button}>
+        <View style={[styles.button]}>
           <TouchableOpacity
             style={[styles.signIn, {justifyContent: 'center'}]}
             onPress={() => navigation.navigate('Documentverification')}>
@@ -66,7 +70,7 @@ export default function Withdrawal({navigation}) {
                     color: '#fff',
                   },
                 ]}>
-                Verify
+                VERIFY
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -111,10 +115,10 @@ const styles = StyleSheet.create({
     flex: 0.2,
   },
   button: {
-    marginTop: 10,
     alignItems: 'center',
     width: '100%',
-    flex: 1,
+
+    flex: 0.4,
   },
   textSign: {
     fontSize: 18,
@@ -126,7 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
-    paddingRight: 20,
   },
   signIn: {
     width: '90%',

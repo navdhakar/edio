@@ -44,7 +44,6 @@ export default function Home({navigation}) {
               source={require('../../assets/icons/edio_home_logo.png')}
               resizeMode={'contain'}
               style={{
-                width: '50%',
                 height: '50%',
               }}
             />
@@ -58,8 +57,6 @@ export default function Home({navigation}) {
               fontFamily: 'Quicksand',
               fontStyle: 'normal',
               flex: 4,
-
-              marginLeft: -90,
             }}>
             Prove Your Talent
           </Text>

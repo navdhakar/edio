@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,21 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function Documentverification({navigation}) {
+export default function Verificationstatus({navigation}) {
+  const [verificationstatus, setverificationstatus] = useState('processing');
+  function Text1() {
+    if (verificationstatus == 'processing') {
+      return (
+        <Text style={styles.text1}>
+          KYC Details have been uploaded successfully.
+        </Text>
+      );
+    } else if (verificationstatus == 'processed') {
+      return <Text style={styles.text1}>KYC veridication successfull.</Text>;
+    } else if (verificationstatus == 'failed') {
+      return <Text style={styles.text1}>Verification Failed!</Text>;
+    }
+  }
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -46,53 +60,20 @@ export default function Documentverification({navigation}) {
         </Text>
       </LinearGradient>
       <Image
-        source={require('../../assets/icons/id_verification.png')}
+        source={require('../../assets/icons/timer.png')}
         resizeMode={'contain'}
         style={{
           width: '30%',
           height: '40%',
-          marginLeft: 20,
+
           flex: 0.2,
         }}
       />
-
-      <Text style={styles.text1}>
-        Select a document for Identity verification
-      </Text>
+      <Text1 />
       <Text style={styles.text2}>
         As per government guidelines, we need a valid proof to allow cash
         transactions on EDIO
       </Text>
-      <TouchableOpacity
-        style={styles.pancard}
-        onPress={() => navigation.navigate('Panverification')}>
-        <Text style={styles.pan_adhaartext}>Pan Card</Text>
-        <Image
-          source={require('../../assets/icons/cardright.png')}
-          resizeMode={'contain'}
-          style={{
-            width: '5%',
-            height: '20%',
-
-            flex: 0.2,
-          }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.adhaar}
-        onPress={() => navigation.navigate('Adhaarverification')}>
-        <Text style={styles.pan_adhaartext}>Adhaar Card</Text>
-        <Image
-          source={require('../../assets/icons/cardright.png')}
-          resizeMode={'contain'}
-          style={{
-            width: '20%',
-            height: '20%',
-
-            flex: 0.2,
-          }}
-        />
-      </TouchableOpacity>
     </View>
   );
 }
@@ -102,16 +83,15 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     justifyContent: 'flex-start',
     flex: 1,
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   text1: {
     fontFamily: 'Roboto',
     fontWeight: '800',
     fontStyle: 'normal',
-    fontSize: 16,
+    fontSize: 20,
     color: 'black',
     marginTop: 1,
-    marginLeft: 20,
   },
   text2: {
     width: '85%',
@@ -120,7 +100,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontSize: 14,
     color: '#20202099',
-    marginLeft: 20,
+
     marginTop: 10,
   },
   pancard: {

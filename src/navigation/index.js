@@ -5,7 +5,7 @@ import Login from '../screens/Login/Login';
 // import StudentSignup from '../screens/StudentSignup/index';
 import StudentInfo from '../screens/StudentSignup/Studentinfo';
 import EducationalInfo from '../screens/StudentSignup/Educationalinfo';
-import {SafeAreaView, View, Image, Text} from 'react-native';
+import {SafeAreaView, View, Image, Text, TouchableOpacity} from 'react-native';
 import MobileNo from '../screens/Login/Mobile';
 import Otp from '../screens/Login/Otp';
 import Homedrawer from '../screens/Home/Homedrawer';
@@ -17,7 +17,7 @@ import Bottomtabnav from './Home/Bottomtab';
 import {createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-const RootNavigation = () => {
+const RootNavigation = props => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -33,7 +33,7 @@ const RootNavigation = () => {
         }}
         screenOptions={{
           headerShown: false,
-          // swipeEnabled: true,
+          swipeEnabled: false,
           // gestureEnabled: true,
           // headerTitleAlign: 'center',
           // headerStyle: {
@@ -47,7 +47,7 @@ const RootNavigation = () => {
         }}
         drawerContent={props => {
           return (
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={{flex: 1}} {...props}>
               <View
                 style={{
                   alignItems: 'center',
@@ -59,15 +59,35 @@ const RootNavigation = () => {
                   borderBottomWidth: 1,
                   borderBottomColor: '#20202014',
                 }}>
-                <Image
-                  resizeMode={'contain'}
-                  source={require('../assets/icons/drawer_profile.png')}
+                <View
                   style={{
-                    width: '15%',
-                    height: '50%',
                     flex: 2,
-                  }}
-                />
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+
+                    alignItems: 'center',
+                  }}>
+                  <Image
+                    resizeMode={'contain'}
+                    source={require('../assets/icons/drawer_profile.png')}
+                    style={{
+                      width: '15%',
+                      height: '50%',
+                    }}
+                  />
+                  <TouchableOpacity
+                    style={{flex: 1}}
+                    onPress={() => props.navigation.closeDrawer()}>
+                    <Image
+                      resizeMode={'contain'}
+                      source={require('../assets/icons/close.png')}
+                      style={{
+                        width: '180%',
+                        height: '22%',
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
                 <Text
                   style={{
                     fontFamily: 'Roboto',
