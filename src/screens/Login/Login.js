@@ -17,29 +17,34 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import {Formik} from 'formik';
-import {useTheme} from 'react-native-paper';
+import { Formik } from 'formik';
+import { useTheme } from 'react-native-paper';
 import * as Yup from 'yup';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/stack';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/stack';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const signinvalidationSchema = Yup.object().shape({
   email: Yup.string().required().email('please enter valid email'),
   password: Yup.string().required().min(2, 'not strong password'),
 });
-const SignInScreen = ({navigation}) => {
+const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
     username: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
   });
+<<<<<<< HEAD:src/screens/Login/Login.js
   const illustration = [
     require('../../assets/icons/slide1.png'),
     require('../../assets/icons/slide2.png'),
     require('../../assets/icons/slide3.png'),
   ];
   const {colors} = useTheme();
+=======
+
+  const { colors } = useTheme();
+>>>>>>> edio/develop:screens/Login/Login.js
 
   // const textInputChange = val => {
   //   if (val.trim().length >= 4) {
@@ -101,6 +106,7 @@ const SignInScreen = ({navigation}) => {
       <View style={styles.header}>
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
+<<<<<<< HEAD:src/screens/Login/Login.js
       <View style={styles.show_text}>
         <View>
           <SliderBox
@@ -117,11 +123,25 @@ const SignInScreen = ({navigation}) => {
       <Animatable.View animation="fadeInUpBig" style={[styles.footer]}>
         {/* <Formik
           initialValues={{email: '', password: ''}}
+=======
+      <Animatable.View
+        animation="fadeInUpBig"
+        style={[
+          styles.footer,
+          {
+            backgroundColor: colors.background,
+          },
+        ]}
+      >
+        <Formik
+          initialValues={{ email: '', password: '' }}
+>>>>>>> edio/develop:screens/Login/Login.js
           validationSchema={signinvalidationSchema}
           onSubmit={(values, actions) => {
             console.log(values);
-          }}>
-          {props => (
+          }}
+        >
+          {(props) => (
             <View>
               <Text style={[styles.text_footer]}>Email</Text>
 
@@ -158,7 +178,8 @@ const SignInScreen = ({navigation}) => {
                     color: colors.text,
                     marginTop: 35,
                   },
-                ]}>
+                ]}
+              >
                 Password
               </Text>
               <View style={styles.action}>
@@ -192,6 +213,7 @@ const SignInScreen = ({navigation}) => {
               ) : null}
             </View>
           )}
+<<<<<<< HEAD:src/screens/Login/Login.js
         </Formik> */}
         {/* <TouchableOpacity>
           <Text style={{color: '#009387', marginTop: 15}}>
@@ -205,14 +227,34 @@ const SignInScreen = ({navigation}) => {
             <LinearGradient
               colors={['#660066CC', '#660066CC']}
               style={[styles.signIn, {justifyContent: 'center'}]}>
+=======
+        </Formik>
+        <TouchableOpacity>
+          <Text style={{ color: '#009387', marginTop: 15 }}>Forgot password?</Text>
+        </TouchableOpacity>
+        <View style={styles.button}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={() => {
+              loginHandle(data.username, data.password);
+            }}
+          >
+            <LinearGradient colors={['#28B9D7', '#28B9D7']} style={styles.signIn}>
+>>>>>>> edio/develop:screens/Login/Login.js
               <Text
                 style={[
                   styles.textSign,
                   {
                     color: '#fff',
                   },
+<<<<<<< HEAD:src/screens/Login/Login.js
                 ]}>
                 GET STARTED
+=======
+                ]}
+              >
+                Log In
+>>>>>>> edio/develop:screens/Login/Login.js
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -221,28 +263,29 @@ const SignInScreen = ({navigation}) => {
               flexDirection: 'row',
               alignItems: 'center',
               paddingBottom: 20,
-            }}>
-            <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+            }}
+          >
+            <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
             <View>
-              <Text style={{width: 50, textAlign: 'center'}}>OR</Text>
+              <Text style={{ width: 50, textAlign: 'center' }}>OR</Text>
             </View>
-            <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+            <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
           </View>
           <TouchableOpacity
-            style={[styles.othersignin, {paddingBottom: 20}]}
+            style={[styles.othersignin, { paddingBottom: 20 }]}
             onPress={() => {
               loginHandle(data.username, data.password);
-            }}>
-            <LinearGradient
-              colors={['#3A5898', '#3A5898']}
-              style={styles.othersignin}>
+            }}
+          >
+            <LinearGradient colors={['#3A5898', '#3A5898']} style={styles.othersignin}>
               <Text
                 style={[
                   styles.textSign,
                   {
                     color: '#fff',
                   },
-                ]}>
+                ]}
+              >
                 Continue with Facebook
               </Text>
             </LinearGradient>
@@ -251,11 +294,18 @@ const SignInScreen = ({navigation}) => {
             style={styles.othersignin}
             onPress={() => {
               loginHandle(data.username, data.password);
-            }}>
+            }}
+          >
             <LinearGradient
               colors={['#fff', '#fff']}
+<<<<<<< HEAD:src/screens/Login/Login.js
               style={[styles.signIn, {flexDirection: 'row'}]}> */}
           {/* <FontAwesome
+=======
+              style={[styles.signIn, { flexDirection: 'row' }]}
+            >
+              {/* <FontAwesome
+>>>>>>> edio/develop:screens/Login/Login.js
                 name="google"
                 color={colors.text}
                 size={20}
@@ -263,7 +313,7 @@ const SignInScreen = ({navigation}) => {
               /> */}
           {/* <Image
                 source={require('../../assets/icons/icon_google.svg')}
-                style={[styles.ImageIconStyle, {paddingRight: 20}]}
+                style={[styles.ImageIconStyle, { paddingRight: 20 }]}
               />
 
               <Text
@@ -272,7 +322,8 @@ const SignInScreen = ({navigation}) => {
                   {
                     color: '#000',
                   },
-                ]}>
+                ]}
+              >
                 Continue with Google
               </Text>
             </LinearGradient>

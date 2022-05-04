@@ -1,79 +1,75 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Image,
-  ScrollView,
-  StatusBar,
-} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
-
-import HomeTemplate from './HomeTemplate';
-export default function Home({navigation}) {
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
+export default function Home() {
   return (
     <View style={styles.container}>
-      <StatusBar animated={true} backgroundColor="#660066" />
-      <LinearGradient
-        colors={['#660066', '#330066']}
-        style={{
-          flex: 0.08,
-          width: '100%',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            flex: 1,
-            width: '100%',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-
-              flexDirection: 'row',
-            }}
-            onPress={() => navigation.openDrawer()}>
-            <Image
-              source={require('../../assets/icons/edio_home_logo.png')}
-              resizeMode={'contain'}
+      <Text style={styles.header}>Homescreen</Text>
+      <View style={styles.boxContainer}>
+        <View style={styles.box}>
+          <View style={styles.leftSection}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>13 jun 22</Text>
+            <View
               style={{
-                height: '50%',
+                borderBottomColor: 'grey',
+                borderBottomWidth: 1,
               }}
             />
-          </TouchableOpacity>
-
-          <Text
+            <Text style={{fontWeight: 'bold'}}>7pm - 8pm</Text>
+          </View>
+          <View
             style={{
-              color: '#fff',
-              fontSize: 24,
-              fontWeight: '700',
-              fontFamily: 'Quicksand',
-              fontStyle: 'normal',
-              flex: 4,
-            }}>
-            Prove Your Talent
-          </Text>
+              marginLeft: '15%',
+              marginTop: '5%',
+              marginBottom: '5%',
+              borderRightColor: 'grey',
+              borderRightWidth: 1,
+            }}
+          />
+          <View style={styles.rightSection}>
+            <View style={styles.Rtop}>
+              <Text style={{fontWeight: 'bold'}}>Subject name</Text>
+              <Text style={{fontWeight: 'bold', marginLeft: '10%'}}>
+                HH:MM:SS
+              </Text>
+            </View>
+            <View style={styles.Rbottom}>
+              <Text style={{fontWeight: 'bold'}}>Test series Poster</Text>
+            </View>
+          </View>
         </View>
-      </LinearGradient>
-      <ScrollView
-        style={styles.boxContainer}
-        contentContainerStyle={{justifyContent: 'center'}}
-        showsVerticalScrollIndicator={false}>
-        <HomeTemplate type={'anytime'} />
-        <HomeTemplate type={'physics'} />
-        <HomeTemplate type={'chemistry'} />
-        <HomeTemplate type={'maths'} />
-        <HomeTemplate type={'physics'} />
-        <HomeTemplate type={'chemistry'} />
-        <HomeTemplate type={'maths'} />
-      </ScrollView>
+        <View style={styles.box}>
+          <View style={styles.leftSection}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>13 jun 22</Text>
+            <View
+              style={{
+                borderBottomColor: 'grey',
+                borderBottomWidth: 1,
+              }}
+            />
+            <Text style={{fontWeight: 'bold'}}>7pm - 8pm</Text>
+          </View>
+          <View
+            style={{
+              marginLeft: '15%',
+              marginTop: '5%',
+              marginBottom: '5%',
+              borderRightColor: 'grey',
+              borderRightWidth: 1,
+            }}
+          />
+          <View style={styles.rightSection}>
+            <View style={styles.Rtop}>
+              <Text style={{fontWeight: 'bold'}}>Subject name</Text>
+              <Text style={{fontWeight: 'bold', marginLeft: '10%'}}>
+                HH:MM:SS
+              </Text>
+            </View>
+            <View style={styles.Rbottom}>
+              <Text style={{fontWeight: 'bold'}}>Test series Poster</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
@@ -89,20 +85,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   boxContainer: {
-    flex: 0.8,
+    flex: 2,
     height: Dimensions.get('window').height,
     width: '90%',
-    marginTop: 20,
+    justifyContent: 'center',
   },
   box: {
     flexDirection: 'row',
     marginBottom: '10%',
     width: '100%',
-    height: '30%',
-    borderRadius: 20,
-    backgroundColor: '#CA525929',
-    borderLeftColor: '#CA5259D6',
-    borderLeftWidth: 16,
+    height: '40%',
+
+    backgroundColor: 'white',
+    elevation: 5,
   },
   profilePicture: {
     width: 150,
@@ -122,13 +117,12 @@ const styles = StyleSheet.create({
   },
   leftSection: {
     marginLeft: '5%',
-    flex: 4,
-    justifyContent: 'flex-start',
-    marginTop: 10,
+    flex: 2,
+    justifyContent: 'center',
   },
   rightSection: {
     marginLeft: '5%',
-    flex: 2,
+    flex: 10,
   },
   Rtop: {
     flex: 2,

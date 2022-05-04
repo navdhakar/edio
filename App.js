@@ -23,8 +23,7 @@ import Navigation from './src/navigation/index';
 
 const App = () => {
   return (
-    <SafeAreaView
-      style={{width: '100%', height: '100%', backgroundColor: '#28B9D7'}}>
+    <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: '#28B9D7' }}>
       <Navigation />
     </SafeAreaView>
   );
