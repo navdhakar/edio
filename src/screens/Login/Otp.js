@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,9 @@ import {
   Alert,
   Button,
 } from 'react-native';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {useTheme} from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const RESEND_OTP_TIME_LIMIT = 30;
@@ -27,25 +27,18 @@ const signinvalidationSchema = Yup.object().shape({
   code3: Yup.string().required().min(1, 'not strong password'),
   code4: Yup.string().required().min(1, 'not strong password'),
 });
-export default function Otp({navigation}) {
-  const {colors} = useTheme();
+export default function Otp({ navigation }) {
+  const { colors } = useTheme();
   const [focus, setfocus] = useState(false);
   const [verify, setverify] = useState(false);
   const [otpArray, setOtpArray] = useState(['', '', '', '']);
   const [submittingOtp, setSubmittingOtp] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(
-    RESEND_OTP_TIME_LIMIT,
-  );
-  const inputbox = [
-    firstTextInputRef,
-    secondTextInputRef,
-    thirdTextInputRef,
-    fourthTextInputRef,
-  ];
+  const [resendButtonDisabledTime, setResendButtonDisabledTime] = useState(RESEND_OTP_TIME_LIMIT);
+  const inputbox = [firstTextInputRef, secondTextInputRef, thirdTextInputRef, fourthTextInputRef];
   const customVerify = verify ? styles.validverifystyle : styles.verifystyle;
   const customStyle = focus ? styles.actionfocus : styles.action;
-  const refCallback = textInputRef => node => {
+  const refCallback = (textInputRef) => (node) => {
     textInputRef.current = node;
   };
   const firstTextInputRef = useRef();
@@ -74,8 +67,8 @@ export default function Otp({navigation}) {
       }
     }, 1000);
   };
-  const onOtpChange = index => {
-    return value => {
+  const onOtpChange = (index) => {
+    return (value) => {
       if (isNaN(Number(value))) {
         // do nothing when a non digit is pressed
         return;
@@ -96,8 +89,8 @@ export default function Otp({navigation}) {
       }
     };
   };
-  const onOtpKeyPress = index => {
-    return ({nativeEvent: {key: value}}) => {
+  const onOtpKeyPress = (index) => {
+    return ({ nativeEvent: { key: value } }) => {
       // auto focus to previous InputText if value is blank and existing value is also blank
       if (value === 'Backspace' && otpArray[index] === '') {
         if (index === 1) {
@@ -130,76 +123,74 @@ export default function Otp({navigation}) {
         <Text style={[styles.text_footer]}>Verify phone number</Text>
       </View>
       <Formik
-        initialValues={{code1: '', code2: '', code3: '', code4: ''}}
+        initialValues={{ code1: '', code2: '', code3: '', code4: '' }}
         validationSchema={signinvalidationSchema}
         onSubmit={(values, actions) => {
           console.log(values);
-        }}>
-        {props => (
-          <View style={{flexDirection: 'row', width: '80%'}}>
-            {[
-              firstTextInputRef,
-              secondTextInputRef,
-              thirdTextInputRef,
-              fourthTextInputRef,
-            ].map((textInputRef, index) => (
-              <View style={customStyle} onFocus={() => setfocus(true)}>
-                <TouchableOpacity style={styles.mobilenoani}>
-                  <TextInput
-                    value={otpArray[index]}
-                    placeholderTextColor="#666666"
-                    keyboardType="numeric"
-                    style={[
-                      styles.textInput1,
-                      {
-                        color: colors.text,
-                      },
-                    ]}
-                    autoCapitalize="none"
-                    maxLength={1}
-                    returnKeyType="next"
-                    onKeyPress={onOtpKeyPress(index)}
-                    onChangeText={onOtpChange(index)}
-                    ref={refCallback(textInputRef)}
-                    key={index}
-                  />
-                </TouchableOpacity>
-              </View>
-            ))}
+        }}
+      >
+        {(props) => (
+          <View style={{ flexDirection: 'row', width: '80%' }}>
+            {[firstTextInputRef, secondTextInputRef, thirdTextInputRef, fourthTextInputRef].map(
+              (textInputRef, index) => (
+                <View style={customStyle} onFocus={() => setfocus(true)}>
+                  <TouchableOpacity style={styles.mobilenoani}>
+                    <TextInput
+                      value={otpArray[index]}
+                      placeholderTextColor="#666666"
+                      keyboardType="numeric"
+                      style={[
+                        styles.textInput1,
+                        {
+                          color: colors.text,
+                        },
+                      ]}
+                      autoCapitalize="none"
+                      maxLength={1}
+                      returnKeyType="next"
+                      onKeyPress={onOtpKeyPress(index)}
+                      onChangeText={onOtpChange(index)}
+                      ref={refCallback(textInputRef)}
+                      key={index}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )
+            )}
           </View>
         )}
       </Formik>
-      <Text style={{paddingLeft: 10}}>
-        Enter the 4 digit OTP send to +91 9075839282
-      </Text>
+      <Text style={{ paddingLeft: 10 }}>Enter the 4 digit OTP send to +91 9075839282</Text>
       <Text
         style={{
           paddingLeft: 10,
           fontSize: 16,
           fontWeight: '600',
           paddingTop: 20,
-        }}>
+        }}
+      >
         Resend OTP in{' '}
         {resendButtonDisabledTime > 0 ? (
-          <Text style={{fontWeight: '600', color: 'black'}}>
-            {resendButtonDisabledTime}
-          </Text>
+          <Text style={{ fontWeight: '600', color: 'black' }}>{resendButtonDisabledTime}</Text>
         ) : null}
       </Text>
       <View style={styles.button}>
         <TouchableOpacity
-          style={[styles.signIn, {justifyContent: 'center'}]}
-          onPress={() => navigation.navigate('StudentInfo')}>
+          style={[styles.signIn, { justifyContent: 'center' }]}
+          onPress={() => navigation.navigate('StudentInfo')}
+        >
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
-            style={[customVerify, {justifyContent: 'center'}]}>
+            style={[customVerify, { justifyContent: 'center' }]}
+          >
             <Text
               style={[
                 styles.textSign,
                 {
                   color: '#fff',
                 },
-              ]}>
+              ]}
+            >
               VERIFY
             </Text>
           </LinearGradient>

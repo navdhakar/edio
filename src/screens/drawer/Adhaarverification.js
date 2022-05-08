@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 import {
@@ -14,26 +14,26 @@ import {
   ScrollView,
   Button,
 } from 'react-native';
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {useTheme} from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const signinvalidationSchema = Yup.object().shape({
   PhoneNumber: Yup.string().required().min(10, 'not strong password'),
 });
-export default function Adhaarverification({navigation}) {
+export default function Adhaarverification({ navigation }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [dob, hidedob] = useState(false);
   const dobdisplay = dob ? styles.dobhide : styles.dobshow;
 
   const [items, setItems] = useState([
-    {label: 'Pan Card', value: 'Pan Card'},
-    {label: 'Adhaar', value: 'Adhaar'},
+    { label: 'Pan Card', value: 'Pan Card' },
+    { label: 'Adhaar', value: 'Adhaar' },
   ]);
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const [firstname_value, setfirstname] = useState('');
   const [lastname_value, setlastname] = useState('');
   const [pan_value, setpan] = useState('');
@@ -52,10 +52,9 @@ export default function Adhaarverification({navigation}) {
           flexDirection: 'row',
           alignItems: 'center',
           height: 50,
-        }}>
-        <TouchableOpacity
-          style={{flex: 0.5}}
-          onPress={() => navigation.goBack()}>
+        }}
+      >
+        <TouchableOpacity style={{ flex: 0.5 }} onPress={() => navigation.goBack()}>
           <Image
             source={require('../../assets/icons/Back.png')}
             resizeMode={'contain'}
@@ -74,7 +73,8 @@ export default function Adhaarverification({navigation}) {
             fontFamily: 'Quicksand',
             fontStyle: 'normal',
             flex: 3,
-          }}>
+          }}
+        >
           Aadhar Verification
         </Text>
       </LinearGradient>
@@ -89,28 +89,29 @@ export default function Adhaarverification({navigation}) {
         validationSchema={signinvalidationSchema}
         onSubmit={(values, actions) => {
           console.log(values);
-        }}>
-        {props => (
+        }}
+      >
+        {(props) => (
           <ScrollView>
-            <View style={{marginTop: 5}}>
+            <View style={{ marginTop: 5 }}>
               <View
-                style={[styles.action, {borderWidth: 0}]}
+                style={[styles.action, { borderWidth: 0 }]}
                 onFocus={() => {
                   setdocumenttype('Document type');
                 }}
-                onPress={() => hidedob(true)}>
+                onPress={() => hidedob(true)}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     Document type
                   </Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.mobilenoani}
-                  onPress={() => hidedob(true)}>
-                  <View style={{flex: 6, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.mobilenoani} onPress={() => hidedob(true)}>
+                  <View style={{ flex: 6, justifyContent: 'center' }}>
                     <DropDownPicker
                       open={open}
                       value={value}
@@ -130,19 +131,21 @@ export default function Adhaarverification({navigation}) {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{documenttype_value}</Text>
               </View>
               <View
-                style={[styles.action, {height: 120}]}
+                style={[styles.action, { height: 120 }]}
                 onFocus={() => {
                   setimportpan('Import FRONT SIDE of PAN card image');
-                }}>
+                }}
+              >
                 <TouchableOpacity
                   style={[
                     styles.signIn,
-                    {justifyContent: 'center', marginTop: 30, marginLeft: 110},
-                  ]}>
+                    { justifyContent: 'center', marginTop: 30, marginLeft: 110 },
+                  ]}
+                >
                   <LinearGradient
                     colors={['#660066CC', '#660066CC']}
                     style={[
@@ -153,7 +156,8 @@ export default function Adhaarverification({navigation}) {
                         height: 45,
                         flexDirection: 'row',
                       },
-                    ]}>
+                    ]}
+                  >
                     <Image
                       source={require('../../assets/icons/download.png')}
                       resizeMode={'contain'}
@@ -171,42 +175,46 @@ export default function Adhaarverification({navigation}) {
                           color: '#fff',
                           marginLeft: 10,
                         },
-                      ]}>
+                      ]}
+                    >
                       Browse file
                     </Text>
                   </LinearGradient>
                 </TouchableOpacity>
-                <View style={{marginLeft: 70}}>
-                  <Text style={{fontSize: 12}}>{importpan_value}</Text>
+                <View style={{ marginLeft: 70 }}>
+                  <Text style={{ fontSize: 12 }}>{importpan_value}</Text>
                 </View>
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     Upload Aadhar card image
                   </Text>
                 </View>
                 <TouchableOpacity style={[styles.mobilenoani]}>
-                  <View style={{flex: 6}}></View>
+                  <View style={{ flex: 6 }}></View>
                 </TouchableOpacity>
               </View>
 
               <View
-                style={[styles.action, {marginTop: 10}]}
+                style={[styles.action, { marginTop: 10 }]}
                 onFocus={() => {
                   setfirstname('First name as on Aadhar card');
-                }}>
+                }}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     First name as on Aadhar card
                   </Text>
                 </View>
                 <TouchableOpacity style={styles.mobilenoani}>
-                  <View style={{flex: 6}}>
+                  <View style={{ flex: 6 }}>
                     <TextInput
                       placeholder="First name as on Aadhar card"
                       placeholderTextColor="#666666"
@@ -223,24 +231,26 @@ export default function Adhaarverification({navigation}) {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{firstname_value}</Text>
               </View>
               <View
                 style={styles.action}
                 onFocus={() => {
                   setlastname('Last name as on Aadhar card');
-                }}>
+                }}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     Last name as on Aadhar card
                   </Text>
                 </View>
                 <TouchableOpacity style={styles.mobilenoani}>
-                  <View style={{flex: 6}}>
+                  <View style={{ flex: 6 }}>
                     <TextInput
                       placeholder="First name as on PAN card"
                       placeholderTextColor="#666666"
@@ -257,24 +267,26 @@ export default function Adhaarverification({navigation}) {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{lastname_value}</Text>
               </View>
               <View
                 style={styles.action}
                 onFocus={() => {
                   setpan('Aadhar card number');
-                }}>
+                }}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     Aadhar card number
                   </Text>
                 </View>
                 <TouchableOpacity style={styles.mobilenoani}>
-                  <View style={{flex: 6}}>
+                  <View style={{ flex: 6 }}>
                     <TextInput
                       placeholder="Aadhar card number"
                       placeholderTextColor="#666666"
@@ -291,19 +303,21 @@ export default function Adhaarverification({navigation}) {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{pan_value}</Text>
               </View>
               <View
                 style={styles.action}
                 onFocus={() => {
                   setdob('Enter your birthday or select from calendar');
-                }}>
+                }}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     Date of Birth
                   </Text>
                 </View>
@@ -314,7 +328,8 @@ export default function Adhaarverification({navigation}) {
                       flexDirection: 'row',
                       alignItems: 'center',
                       paddingRight: 18,
-                    }}>
+                    }}
+                  >
                     <TextInput
                       placeholder="Date of birth"
                       placeholderTextColor="#666666"
@@ -328,33 +343,31 @@ export default function Adhaarverification({navigation}) {
                       onChangeText={props.handleChange('PhoneNumber')}
                       value={props.values.PhoneNumber}
                     />
-                    <Image
-                      source={require('../../assets/icons/calender_icon.png')}
-                    />
+                    <Image source={require('../../assets/icons/calender_icon.png')} />
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{dob_value}</Text>
               </View>
               <View
-                style={[styles.action, {borderWidth: 0}]}
+                style={[styles.action, { borderWidth: 0 }]}
                 onFocus={() => {
                   setstate('enter your state');
                 }}
-                onPress={() => hidedob(true)}>
+                onPress={() => hidedob(true)}
+              >
                 <View style={styles.labelContainer}>
                   <Text
                     style={{
                       color: '#660066',
-                    }}>
+                    }}
+                  >
                     State
                   </Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.mobilenoani}
-                  onPress={() => hidedob(true)}>
-                  <View style={{flex: 6, justifyContent: 'center'}}>
+                <TouchableOpacity style={styles.mobilenoani} onPress={() => hidedob(true)}>
+                  <View style={{ flex: 6, justifyContent: 'center' }}>
                     <DropDownPicker
                       open={open}
                       value={value}
@@ -374,7 +387,7 @@ export default function Adhaarverification({navigation}) {
                   </View>
                 </TouchableOpacity>
               </View>
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text>{state_value}</Text>
               </View>
             </View>
@@ -382,7 +395,7 @@ export default function Adhaarverification({navigation}) {
         )}
       </Formik>
 
-      <View style={([styles.button], {alignItems: 'center', marginBottom: 20})}>
+      <View style={([styles.button], { alignItems: 'center', marginBottom: 20 })}>
         <TouchableOpacity
           style={[
             styles.signIn,
@@ -393,20 +406,20 @@ export default function Adhaarverification({navigation}) {
               paddingRight: -20,
             },
           ]}
-          onPress={() => navigation.navigate('EducationalInfo')}>
+          onPress={() => navigation.navigate('Verificationstatus')}
+        >
           <LinearGradient
             colors={['#660066CC', '#660066CC']}
-            style={[
-              styles.signIN,
-              {alignItems: 'center', width: '93%', flex: 1},
-            ]}>
+            style={[styles.signIN, { alignItems: 'center', width: '93%', flex: 1 }]}
+          >
             <Text
               style={[
                 styles.textSign,
                 {
                   color: '#fff',
                 },
-              ]}>
+              ]}
+            >
               SUBMIT
             </Text>
           </LinearGradient>

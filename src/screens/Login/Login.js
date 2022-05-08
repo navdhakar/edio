@@ -12,7 +12,7 @@ import {
   Button,
   Dimensions,
 } from 'react-native';
-import {SliderBox} from 'react-native-image-slider-box';
+import { SliderBox } from 'react-native-image-slider-box';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -34,17 +34,12 @@ const SignInScreen = ({ navigation }) => {
     check_textInputChange: false,
     secureTextEntry: true,
   });
-<<<<<<< HEAD:src/screens/Login/Login.js
   const illustration = [
     require('../../assets/icons/slide1.png'),
     require('../../assets/icons/slide2.png'),
     require('../../assets/icons/slide3.png'),
   ];
-  const {colors} = useTheme();
-=======
-
   const { colors } = useTheme();
->>>>>>> edio/develop:screens/Login/Login.js
 
   // const textInputChange = val => {
   //   if (val.trim().length >= 4) {
@@ -106,7 +101,6 @@ const SignInScreen = ({ navigation }) => {
       <View style={styles.header}>
         <Image source={require('../../assets/icons/edio_logo.png')} />
       </View>
-<<<<<<< HEAD:src/screens/Login/Login.js
       <View style={styles.show_text}>
         <View>
           <SliderBox
@@ -120,22 +114,10 @@ const SignInScreen = ({ navigation }) => {
           />
         </View>
       </View>
+
       <Animatable.View animation="fadeInUpBig" style={[styles.footer]}>
         {/* <Formik
           initialValues={{email: '', password: ''}}
-=======
-      <Animatable.View
-        animation="fadeInUpBig"
-        style={[
-          styles.footer,
-          {
-            backgroundColor: colors.background,
-          },
-        ]}
-      >
-        <Formik
-          initialValues={{ email: '', password: '' }}
->>>>>>> edio/develop:screens/Login/Login.js
           validationSchema={signinvalidationSchema}
           onSubmit={(values, actions) => {
             console.log(values);
@@ -213,7 +195,6 @@ const SignInScreen = ({ navigation }) => {
               ) : null}
             </View>
           )}
-<<<<<<< HEAD:src/screens/Login/Login.js
         </Formik> */}
         {/* <TouchableOpacity>
           <Text style={{color: '#009387', marginTop: 15}}>
@@ -222,39 +203,22 @@ const SignInScreen = ({ navigation }) => {
         </TouchableOpacity> */}
         <View style={styles.button}>
           <TouchableOpacity
-            style={[styles.signIn, {justifyContent: 'center'}]}
-            onPress={() => navigation.navigate('MobileNo')}>
+            style={[styles.signIn, { justifyContent: 'center' }]}
+            onPress={() => navigation.navigate('MobileNo')}
+          >
             <LinearGradient
               colors={['#660066CC', '#660066CC']}
-              style={[styles.signIn, {justifyContent: 'center'}]}>
-=======
-        </Formik>
-        <TouchableOpacity>
-          <Text style={{ color: '#009387', marginTop: 15 }}>Forgot password?</Text>
-        </TouchableOpacity>
-        <View style={styles.button}>
-          <TouchableOpacity
-            style={styles.signIn}
-            onPress={() => {
-              loginHandle(data.username, data.password);
-            }}
-          >
-            <LinearGradient colors={['#28B9D7', '#28B9D7']} style={styles.signIn}>
->>>>>>> edio/develop:screens/Login/Login.js
+              style={[styles.signIn, { justifyContent: 'center' }]}
+            >
               <Text
                 style={[
                   styles.textSign,
                   {
                     color: '#fff',
                   },
-<<<<<<< HEAD:src/screens/Login/Login.js
-                ]}>
-                GET STARTED
-=======
                 ]}
               >
-                Log In
->>>>>>> edio/develop:screens/Login/Login.js
+                GET STARTED
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -298,14 +262,8 @@ const SignInScreen = ({ navigation }) => {
           >
             <LinearGradient
               colors={['#fff', '#fff']}
-<<<<<<< HEAD:src/screens/Login/Login.js
               style={[styles.signIn, {flexDirection: 'row'}]}> */}
           {/* <FontAwesome
-=======
-              style={[styles.signIn, { flexDirection: 'row' }]}
-            >
-              {/* <FontAwesome
->>>>>>> edio/develop:screens/Login/Login.js
                 name="google"
                 color={colors.text}
                 size={20}
